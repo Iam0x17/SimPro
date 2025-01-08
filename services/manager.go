@@ -11,18 +11,18 @@ import (
 
 // ServiceManager结构体，管理多个模拟服务
 type ServiceManager struct {
-	services []common.MockService
+	services []common.SimService
 }
 
 // AddService方法用于添加模拟服务到服务管理器
-func (s *ServiceManager) AddService(service common.MockService) {
+func (s *ServiceManager) AddService(service common.SimService) {
 	s.services = append(s.services, service)
 }
 
 // StartAllServices方法启动所有添加的模拟服务
 func (s *ServiceManager) StartAllServices(ctx context.Context) {
 	for _, service := range s.services {
-		go func(svc common.MockService) {
+		go func(svc common.SimService) {
 			addr := fmt.Sprintf(":%d", getPortForService(svc.GetServiceName()))
 			listener, err := net.Listen("tcp", addr)
 			if err != nil {
@@ -56,6 +56,8 @@ func getPortForService(serviceName string) int {
 		return 2121
 	case "Redis":
 		return 6379
+	case "Telnet":
+		return 2323
 	default:
 		return 0
 	}

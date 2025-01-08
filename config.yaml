@@ -16,3 +16,7 @@ redis:
   port: 6379
   username: ""
   password: "123456"
+telnet:
+  port: 2323
+  username: "root"
+  password: "123456"

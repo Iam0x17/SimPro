@@ -9,4 +9,7 @@ require (
 	gopkg.in/yaml.v2 v2.4.0
 )
 
-require golang.org/x/sys v0.29.0 // indirect
+require (
+	github.com/globalcyberalliance/telnet-go v0.0.0-20241024171652-fd6c82c1906a // indirect
+	golang.org/x/sys v0.29.0 // indirect
+)

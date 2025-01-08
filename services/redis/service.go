@@ -14,7 +14,6 @@ import (
 )
 
 var (
-	connections int
 	redisLogger *logrus.Logger
 )
 
@@ -23,18 +22,18 @@ func init() {
 }
 
 // MockRedisService结构体实现通用的MockService接口
-type MockRedisService struct{}
+type SimRedisService struct{}
 
-func (m *MockRedisService) NeedsListener() bool {
+func (m *SimRedisService) NeedsListener() bool {
 	return false
 }
 
-func (m *MockRedisService) ServeWithListener(ctx context.Context, listener net.Listener) {
+func (m *SimRedisService) ServeWithListener(ctx context.Context, listener net.Listener) {
 
 }
 
 // Serve方法处理Redis连接相关逻辑
-func (m *MockRedisService) Serve(ctx context.Context, conn net.Conn) {
+func (m *SimRedisService) Serve(ctx context.Context, conn net.Conn) {
 	cfg, err := config.LoadConfig()
 	if err != nil {
 		redisLogger.Fatalf("加载配置失败: %v", err)
@@ -192,6 +191,6 @@ func (m *MockRedisService) Serve(ctx context.Context, conn net.Conn) {
 }
 
 // GetServiceName返回服务名称
-func (m *MockRedisService) GetServiceName() string {
+func (m *SimRedisService) GetServiceName() string {
 	return "Redis"
 }

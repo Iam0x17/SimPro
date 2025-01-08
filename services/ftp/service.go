@@ -15,18 +15,18 @@ import (
 )
 
 // MockFTPService结构体实现MockService接口
-type MockFTPService struct{}
+type SimFTPService struct{}
 
-func (m *MockFTPService) NeedsListener() bool {
+func (m *SimFTPService) NeedsListener() bool {
 	return true
 }
 
-func (m *MockFTPService) Serve(ctx context.Context, conn net.Conn) {
+func (m *SimFTPService) Serve(ctx context.Context, conn net.Conn) {
 
 }
 
 // Serve方法处理FTP连接相关逻辑
-func (m *MockFTPService) ServeWithListener(ctx context.Context, listener net.Listener) {
+func (m *SimFTPService) ServeWithListener(ctx context.Context, listener net.Listener) {
 	cfg, err := config.LoadConfig()
 	if err != nil {
 		log.Fatalf("加载配置失败: %v", err)
@@ -85,6 +85,6 @@ func (m *MockFTPService) ServeWithListener(ctx context.Context, listener net.Lis
 }
 
 // GetServiceName方法返回服务名称
-func (m *MockFTPService) GetServiceName() string {
+func (m *SimFTPService) GetServiceName() string {
 	return "FTP"
 }

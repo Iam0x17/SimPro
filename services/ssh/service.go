@@ -29,18 +29,18 @@ func init() {
 }
 
 // MockSSHService 实现通用的MockService接口
-type MockSSHService struct{}
+type SimSSHService struct{}
 
-func (m *MockSSHService) NeedsListener() bool {
+func (m *SimSSHService) NeedsListener() bool {
 	return false
 }
 
-func (m *MockSSHService) ServeWithListener(ctx context.Context, listener net.Listener) {
+func (m *SimSSHService) ServeWithListener(ctx context.Context, listener net.Listener) {
 
 }
 
 // Serve 处理SSH连接相关逻辑
-func (m *MockSSHService) Serve(ctx context.Context, conn net.Conn) {
+func (m *SimSSHService) Serve(ctx context.Context, conn net.Conn) {
 	cfg, err := config.LoadConfig()
 	if err != nil {
 		sshLogger.Fatalf("加载配置失败: %v", err)
@@ -231,11 +231,6 @@ func handleShell(channel ssh.Channel, sshConn *ssh.ServerConn, terminal string, 
 	}
 }
 
-// GetServiceName 返回服务名称
-func (m *MockSSHService) GetServiceName() string {
-	return "SSH"
-}
-
 // loadOrCreatePrivateKey 加载或创建私键
 func loadOrCreatePrivateKey(filename string) (crypto.PrivateKey, error) {
 	var privateKey crypto.PrivateKey
@@ -265,4 +260,9 @@ func loadOrCreatePrivateKey(filename string) (crypto.PrivateKey, error) {
 		}
 	}
 	return privateKey, nil
+}
+
+// GetServiceName 返回服务名称
+func (m *SimSSHService) GetServiceName() string {
+	return "SSH"
 }
