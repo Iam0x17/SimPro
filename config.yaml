@@ -1,0 +1,18 @@
+ssh:
+  port: 2222
+  valid_users:
+    testuser: password123
+    admin: admin123
+  commands:
+    whoami: "root\n"
+    "uname -a": "Linux fake-honeypot 5.15.0-75-generic #82-Ubuntu SMP Mon Jun 19 14:18:11 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux\n"
+ftp:
+  port: 2121
+  user: ftp
+  pass: 123456
+  read_only: true
+  welcome_message: "Welcome to iwebd powered by goftp.io"
+redis:
+  port: 6379
+  username: ""
+  password: "123456"
