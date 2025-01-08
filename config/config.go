@@ -2,7 +2,7 @@ package config
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 
 	"gopkg.in/yaml.v2"
 )
@@ -28,7 +28,7 @@ type Config struct {
 }
 
 func LoadConfig() (*Config, error) {
-	data, err := ioutil.ReadFile(`D:\code\go\ProtoSimService\config.yaml`)
+	data, err := os.ReadFile(`D:\code\go\ProtoSimService\config.yaml`)
 	if err != nil {
 		return nil, fmt.Errorf("读取配置文件失败: %v", err)
 	}
