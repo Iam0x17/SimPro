@@ -1,8 +1,8 @@
 package redis
 
 import (
-	"ProtoSimService/common"
-	"ProtoSimService/config"
+	"SimPro/common"
+	"SimPro/config"
 	"bufio"
 	"context"
 	"net"

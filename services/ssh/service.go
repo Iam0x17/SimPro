@@ -15,8 +15,8 @@ import (
 	"sync"
 	"unicode/utf8"
 
-	"ProtoSimService/common"
-	"ProtoSimService/config"
+	"SimPro/common"
+	"SimPro/config"
 
 	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/ssh"
@@ -57,7 +57,7 @@ func (m *SimSSHService) Serve(ctx context.Context, conn net.Conn) {
 			return nil, fmt.Errorf("密码不允许")
 		},
 		NoClientAuth:  false,
-		ServerVersion: "SSH-2.0-MockSSH",
+		ServerVersion: "SSH-2.0-SimSSH",
 		PublicKeyCallback: func(conn ssh.ConnMetadata, key ssh.PublicKey) (*ssh.Permissions, error) {
 			sshLogger.Printf("收到来自 %s 的公钥认证尝试，公钥: %v", conn.RemoteAddr(), key)
 			return nil, fmt.Errorf("公钥认证不允许")

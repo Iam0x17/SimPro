@@ -6,7 +6,7 @@ import (
 	"log"
 	"net"
 
-	"ProtoSimService/common"
+	"SimPro/common"
 )
 
 // ServiceManager结构体，管理多个模拟服务
@@ -15,8 +15,13 @@ type ServiceManager struct {
 }
 
 // AddService方法用于添加模拟服务到服务管理器
-func (s *ServiceManager) AddService(service common.SimService) {
+func (s *ServiceManager) AddService(service common.SimService) error {
+	if service == nil {
+		return fmt.Errorf("attempt to add a nil service")
+	}
 	s.services = append(s.services, service)
+	return nil
+
 }
 
 // StartAllServices方法启动所有添加的模拟服务

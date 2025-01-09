@@ -1,7 +1,7 @@
 package telnet
 
 import (
-	"ProtoSimService/common"
+	"SimPro/common"
 	"context"
 	"github.com/globalcyberalliance/telnet-go"
 	"github.com/globalcyberalliance/telnet-go/shell"

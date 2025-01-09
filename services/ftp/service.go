@@ -6,9 +6,9 @@ import (
 	"log"
 	"net"
 
-	"ProtoSimService/config"
-	"ProtoSimService/services/ftp/auth"
-	"ProtoSimService/services/ftp/driver"
+	"SimPro/config"
+	"SimPro/services/ftp/auth"
+	"SimPro/services/ftp/driver"
 
 	"goftp.io/server/v2"
 	"goftp.io/server/v2/driver/file"
