@@ -5,6 +5,7 @@ import (
 	"SimPro/services"
 	"SimPro/services/ftp"
 	"SimPro/services/mysql"
+	"SimPro/services/postgres"
 	"SimPro/services/redis"
 	"SimPro/services/ssh"
 	"SimPro/services/telnet"
@@ -55,6 +56,8 @@ func main() {
 	startRedis := flag.Bool("redis", false, "Start the Redis service")
 	startTelnet := flag.Bool("telnet", false, "Start the Telnet service")
 	startMysql := flag.Bool("mysql", false, "Start the Mysql service")
+	//startMongo := flag.Bool("mongo", false, "Start the MongoDB service")
+	startPostgres := flag.Bool("postgres", false, "Start the Postgres service")
 
 	flag.Parse()
 
@@ -65,6 +68,7 @@ func main() {
 	addServiceIfFlagSet(manager, startRedis, &redis.SimRedisService{})
 	addServiceIfFlagSet(manager, startTelnet, &telnet.SimTelnetService{})
 	addServiceIfFlagSet(manager, startMysql, &mysql.SimMySqlService{})
+	addServiceIfFlagSet(manager, startPostgres, &postgres.SimPostgresService{})
 
 	ctx := context.Background()
 	manager.StartAllServices(ctx)

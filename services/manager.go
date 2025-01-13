@@ -65,6 +65,8 @@ func getPortForService(serviceName string) int {
 		return 2323
 	case "MySql":
 		return 3306
+	case "Postgres":
+		return 5432
 	default:
 		return 0
 	}

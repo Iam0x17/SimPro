@@ -28,7 +28,7 @@ func init() {
 	sshLogger = common.SetupServiceLogger("SSH", true)
 }
 
-// MockSSHService 实现通用的MockService接口
+// SimService接口
 type SimSSHService struct{}
 
 func (m *SimSSHService) NeedsListener() bool {
