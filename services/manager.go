@@ -63,6 +63,8 @@ func getPortForService(serviceName string) int {
 		return 6379
 	case "Telnet":
 		return 2323
+	case "MySql":
+		return 3306
 	default:
 		return 0
 	}
