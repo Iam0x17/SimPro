@@ -2,11 +2,12 @@ package telnet
 
 import (
 	"SimPro/common"
-	"context"
+	"SimPro/config"
 	"github.com/globalcyberalliance/telnet-go"
 	"github.com/globalcyberalliance/telnet-go/shell"
 	"github.com/sirupsen/logrus"
 	"net"
+	"sync"
 )
 
 var telnetLogger *logrus.Logger
@@ -16,19 +17,33 @@ func init() {
 }
 
 // MockTelnetService 实现通用的MockService接口
-type SimTelnetService struct{}
-
-func (m *SimTelnetService) NeedsListener() bool {
-	return true
+type SimTelnetService struct {
+	listener net.Listener
+	wg       sync.WaitGroup
 }
 
-func (m *SimTelnetService) Serve(ctx context.Context, conn net.Conn) {
-
+func (s *SimTelnetService) Stop() error {
+	if s.listener != nil {
+		err := s.listener.Close()
+		if err != nil {
+			return err
+		}
+	}
+	s.wg.Wait()
+	telnetLogger.Println("Telnet 服务已停止")
+	return nil
 }
 
 // Serve方法处理FTP连接相关逻辑
-func (m *SimTelnetService) ServeWithListener(ctx context.Context, listener net.Listener) {
-	authHandler := shell.NewAuthHandler("root", "123456", 3)
+func (s *SimTelnetService) Start(cfg *config.Config) error {
+
+	var err error
+	s.listener, err = net.Listen("tcp", ":"+cfg.Telnet.Port)
+	if err != nil {
+		return err
+	}
+	telnetLogger.Printf("Telnet 服务正在监听端口 %s", cfg.Telnet.Port)
+	authHandler := shell.NewAuthHandler(cfg.Telnet.User, cfg.Telnet.Pass, 3)
 	commands := []shell.Command{
 		{
 			Regex:    "^docker$",
@@ -45,13 +60,12 @@ func (m *SimTelnetService) ServeWithListener(ctx context.Context, listener net.L
 	}
 
 	srv := shell.Server{AuthHandler: authHandler, Commands: commands}
-	err := telnet.Serve(listener, srv.HandlerFunc)
-	if err != nil {
-		return
-	}
+	go telnet.Serve(s.listener, srv.HandlerFunc)
+
+	return nil
 }
 
 // GetServiceName方法返回服务名称
-func (m *SimTelnetService) GetServiceName() string {
+func (m *SimTelnetService) GetName() string {
 	return "Telnet"
 }

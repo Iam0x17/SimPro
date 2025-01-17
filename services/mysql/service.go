@@ -2,8 +2,11 @@ package mysql
 
 import (
 	"SimPro/common"
+	"SimPro/config"
 	"context"
+	"fmt"
 	"net"
+	"sync"
 	"time"
 
 	sqle "github.com/dolthub/go-mysql-server"
@@ -25,22 +28,38 @@ var (
 )
 
 func init() {
-	mySqlLogger = common.SetupServiceLogger("Mysql", true)
+	mySqlLogger = common.SetupServiceLogger("MySql", true)
 }
 
 // SimMysqlService 实现通用的MockService接口
-type SimMySqlService struct{}
-
-func (m *SimMySqlService) NeedsListener() bool {
-	return true
+type SimMySqlService struct {
+	listener net.Listener
+	wg       sync.WaitGroup
+	running  bool
 }
 
-func (m *SimMySqlService) Serve(ctx context.Context, conn net.Conn) {
-
+func (s *SimMySqlService) Stop() error {
+	if s.listener != nil {
+		s.running = false
+		err := s.listener.Close()
+		if err != nil {
+			return fmt.Errorf("关闭监听器失败: %v", err)
+		}
+	}
+	mySqlLogger.Println("MySql 服务已停止")
+	return nil
 }
 
 // Serve方法处理FTP连接相关逻辑
-func (m *SimMySqlService) ServeWithListener(ctx context.Context, listener net.Listener) {
+func (s *SimMySqlService) Start(cfg *config.Config) error {
+
+	var err error
+	s.listener, err = net.Listen("tcp", ":"+cfg.MySql.Port)
+	if err != nil {
+		return err
+	}
+	mySqlLogger.Printf("MySql 服务正在监听端口 %s", cfg.MySql.Port)
+
 	pro := createTestDatabase()
 	engine := sqle.NewDefault(pro)
 
@@ -53,23 +72,29 @@ func (m *SimMySqlService) ServeWithListener(ctx context.Context, listener net.Li
 	go func() {
 		ed := mysqlDb.Editor()
 		defer ed.Close()
-		mysqlDb.AddSuperUser(ed, "root", "localhost", "zczc")
+		mysqlDb.AddSuperUser(ed, cfg.MySql.User, "localhost", cfg.MySql.Pass)
 	}()
 
 	config := server.Config{
-		Listener: listener,
+		Listener: s.listener,
 	}
-	s, err := server.NewServer(config, engine, memory.NewSessionBuilder(pro), nil)
+	sServer, err := server.NewServer(config, engine, memory.NewSessionBuilder(pro), nil)
 	if err != nil {
 		panic(err)
 	}
-	if err = s.Start(); err != nil {
-		panic(err)
-	}
+	//if err = sServer.Start(); err != nil {
+	//	panic(err)
+	//}
+	//err = sServer.Close()
+	//if err != nil {
+	//	return err
+	//}
+	go sServer.Start()
+	return nil
 }
 
 // GetServiceName方法返回服务名称
-func (m *SimMySqlService) GetServiceName() string {
+func (m *SimMySqlService) GetName() string {
 	return "MySql"
 }
 

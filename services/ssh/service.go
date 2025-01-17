@@ -1,16 +1,12 @@
 package ssh
 
 import (
-	"context"
 	"crypto"
-	"crypto/rand"
-	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
 	"io"
 	"net"
-	"os"
 	"strings"
 	"sync"
 	"unicode/utf8"
@@ -28,30 +24,88 @@ func init() {
 	sshLogger = common.SetupServiceLogger("SSH", true)
 }
 
-// SimService接口
-type SimSSHService struct{}
-
-func (m *SimSSHService) NeedsListener() bool {
-	return false
+// SimSSHService 实现服务接口
+type SimSSHService struct {
+	listener net.Listener
+	wg       sync.WaitGroup
 }
 
-func (m *SimSSHService) ServeWithListener(ctx context.Context, listener net.Listener) {
+func (s *SimSSHService) Start(cfg *config.Config) error {
 
-}
+	// 配置 SSH 服务器
+	sshCfg := setupSSHServerConfig(cfg)
 
-// Serve 处理SSH连接相关逻辑
-func (m *SimSSHService) Serve(ctx context.Context, conn net.Conn) {
-	cfg, err := config.LoadConfig()
+	// 加载或创建私钥
+	private, err := loadOrCreatePrivateKey()
 	if err != nil {
-		sshLogger.Fatalf("加载配置失败: %v", err)
+		sshLogger.Fatal("加载或创建私钥失败: ", err)
 	}
-	commands := cfg.SSH.Commands
+	signer, err := ssh.NewSignerFromKey(private)
+	if err != nil {
+		sshLogger.Fatalf("创建签名器失败: %v", err)
+	}
+	sshCfg.AddHostKey(signer)
 
-	// 配置SSH服务器
-	config := &ssh.ServerConfig{
+	// 监听端口
+	listener, err := net.Listen("tcp", ":"+cfg.SSH.Port)
+	if err != nil {
+		return fmt.Errorf("监听端口失败: %v", err)
+	}
+	s.listener = listener
+	sshLogger.Printf("SSH 服务正在监听端口 %s", cfg.SSH.Port)
+
+	go func() {
+		for {
+			conn, err := s.listener.Accept()
+			if err != nil {
+				if err != net.ErrClosed {
+					//sshLogger.Printf("接受连接失败: %v", err)
+					return
+				}
+				continue
+			}
+			// 建立 SSH 连接
+			sshConn, chans, reqs, err := ssh.NewServerConn(conn, sshCfg)
+			if err != nil {
+				sshLogger.Printf("建立 SSH 连接失败: %v，错误: %v", conn.RemoteAddr(), err)
+				continue
+			}
+			defer sshConn.Close()
+			sshLogger.Printf("新的 SSH 服务连接来自 %s，版本 %v，用户: %v", sshConn.RemoteAddr(), sshConn.ClientVersion(), sshConn.User())
+
+			// 处理 SSH 通道请求
+			go ssh.DiscardRequests(reqs)
+
+			// 处理 SSH 通道
+			s.wg.Add(1)
+			go handleConnection(sshConn, chans, cfg)
+		}
+	}()
+
+	return nil
+}
+
+func (s *SimSSHService) Stop() error {
+	if s.listener != nil {
+		err := s.listener.Close()
+		if err != nil {
+			return fmt.Errorf("关闭监听器失败: %v", err)
+		}
+	}
+	s.wg.Wait()
+	sshLogger.Println("SSH 服务已停止")
+	return nil
+}
+
+func (s *SimSSHService) GetName() string {
+	return "SSH"
+}
+
+func setupSSHServerConfig(cfg *config.Config) *ssh.ServerConfig {
+	sshCfg := &ssh.ServerConfig{
 		PasswordCallback: func(conn ssh.ConnMetadata, password []byte) (*ssh.Permissions, error) {
 			sshLogger.Printf("收到来自 %s 的密码认证尝试，用户: %s，密码: %s", conn.RemoteAddr(), conn.User(), string(password))
-			if pass, ok := cfg.SSH.ValidUsers[conn.User()]; ok && pass == string(password) {
+			if cfg.SSH.User == conn.User() && cfg.SSH.Pass == string(password) {
 				return &ssh.Permissions{}, nil
 			}
 			return nil, fmt.Errorf("密码不允许")
@@ -63,119 +117,94 @@ func (m *SimSSHService) Serve(ctx context.Context, conn net.Conn) {
 			return nil, fmt.Errorf("公钥认证不允许")
 		},
 	}
+	return sshCfg
+}
 
-	// 加载或创建私钥
-	private, err := loadOrCreatePrivateKey("host.key")
-	if err != nil {
-		sshLogger.Fatal("加载或创建私钥失败: ", err)
-	}
-	signer, err := ssh.NewSignerFromKey(private)
-	if err != nil {
-		sshLogger.Fatalf("创建签名器失败: %v", err)
-	}
-	config.AddHostKey(signer)
-
-	// 建立SSH连接
-	sshConn, chans, reqs, err := ssh.NewServerConn(conn, config)
-	if err != nil {
-		sshLogger.Printf("建立SSH连接失败: %v，错误: %v", conn.RemoteAddr(), err)
-		return
-	}
-	sshLogger.Printf("新的SSH连接来自 %s，版本 %v，用户: %v", sshConn.RemoteAddr(), sshConn.ClientVersion(), sshConn.User())
-
-	defer sshConn.Close()
-
-	// 处理SSH通道请求
-	go ssh.DiscardRequests(reqs)
-
-	// 处理SSH通道
-	wg := sync.WaitGroup{}
+func handleConnection(sshConn *ssh.ServerConn, chans <-chan ssh.NewChannel, cfg *config.Config) {
 	for newChannel := range chans {
 		if newChannel.ChannelType() != "session" {
 			newChannel.Reject(ssh.UnknownChannelType, "未知通道类型")
 			continue
 		}
-		sshLogger.Printf("接受来自 %v 的新通道，类型 :%v", conn.RemoteAddr(), newChannel.ChannelType())
+		sshLogger.Printf("接受来自 %v 的新通道，类型 :%v", sshConn.RemoteAddr(), newChannel.ChannelType())
 		channel, requests, err := newChannel.Accept()
 		if err != nil {
 			sshLogger.Printf("无法接受通道: %v", err)
 			continue
 		}
-		wg.Add(1)
 		term := make(chan string, 1)
-		go func(in <-chan *ssh.Request) {
-			defer wg.Done()
-			var terminal string
-			for req := range in {
-				switch req.Type {
-				case "env":
-					req.Reply(true, nil)
-					sshLogger.Printf("收到来自 %v 的env请求 %v", sshConn.RemoteAddr(), req.Type)
-				case "exec":
-					sshLogger.Printf("收到来自 %s 的Exec请求 %v", sshConn.RemoteAddr(), string(req.Payload[4:]))
-					handleExec(req, channel, sshConn, commands)
-				case "shell":
-					sshLogger.Printf("收到来自 %s 的Shell请求", sshConn.RemoteAddr())
-					req.Reply(true, nil)
-					handleShell(channel, sshConn, terminal, commands)
-				case "pty-req":
-					terminal = string(req.Payload[4 : len(req.Payload)-4])
-					if !utf8.ValidString(terminal) {
-						sshLogger.Printf("来自 %s 的无效终端类型，使用默认终端 ", sshConn.RemoteAddr())
-						terminal = "xterm-256color"
-					}
-					term <- terminal
-					req.Reply(true, nil)
-					sshLogger.Printf("收到来自 %v 的pty请求 %v，终端:%v", sshConn.RemoteAddr(), req.Type, terminal)
-				default:
-					sshLogger.Printf("未知请求类型 %s 来自 %v", req.Type, sshConn.RemoteAddr())
-					req.Reply(false, nil)
-				}
-			}
-		}(requests)
-		<-term
+		go handleChannel(channel, requests, sshConn, term, cfg)
 	}
-	wg.Wait()
-	conn.Close()
+}
+
+func handleChannel(channel ssh.Channel, requests <-chan *ssh.Request, sshConn *ssh.ServerConn, term chan<- string, cfg *config.Config) {
+	defer func(channel ssh.Channel) {
+		err := channel.Close()
+		if err != nil {
+
+		}
+	}(channel)
+
+	commands := cfg.SSH.Commands
+	for req := range requests {
+		switch req.Type {
+		case "env":
+			err := req.Reply(true, nil)
+			if err != nil {
+				return
+			}
+			sshLogger.Printf("收到来自 %v 的 env 请求 %v", sshConn.RemoteAddr(), req.Type)
+		case "exec":
+			sshLogger.Printf("收到来自 %s 的 Exec 请求 %v", sshConn.RemoteAddr(), string(req.Payload[4:]))
+			handleExec(req, channel, sshConn, commands)
+		case "shell":
+			sshLogger.Printf("收到来自 %s 的 Shell 请求", sshConn.RemoteAddr())
+			err := req.Reply(true, nil)
+			if err != nil {
+				return
+			}
+			handleShell(channel, sshConn, commands)
+		case "pty-req":
+			terminal := string(req.Payload[4 : len(req.Payload)-4])
+			if !utf8.ValidString(terminal) {
+				sshLogger.Printf("来自 %s 的无效终端类型，使用默认终端 ", sshConn.RemoteAddr())
+				terminal = "xterm-256color"
+			}
+			term <- terminal
+			err := req.Reply(true, nil)
+			if err != nil {
+				return
+			}
+			sshLogger.Printf("收到来自 %v 的 pty 请求 %v，终端:%v", sshConn.RemoteAddr(), req.Type, terminal)
+		default:
+			sshLogger.Printf("未知请求类型 %s 来自 %v", req.Type, sshConn.RemoteAddr())
+			err := req.Reply(false, nil)
+			if err != nil {
+				return
+			}
+		}
+	}
 }
 
 func handleExec(req *ssh.Request, channel ssh.Channel, sshConn *ssh.ServerConn, commands map[string]string) {
 	command := string(req.Payload[4:])
-	sshLogger.Printf("收到来自 %s 的Exec请求 %v", sshConn.RemoteAddr(), command)
-	var output string
-	if val, ok := commands[command]; ok {
-		output = val
-	} else {
-		output = ""
-	}
+	sshLogger.Printf("收到来自 %s 的 Exec 请求 %v", sshConn.RemoteAddr(), command)
+	output := executeCommand(command, commands)
 	sshLogger.Printf("向客户端写入: %v，来自 %v", output, sshConn.RemoteAddr())
 	channel.Write([]byte(output))
-	sshLogger.Printf("发送shell请求 来自 %v", sshConn.RemoteAddr())
-	channel.SendRequest("shell", true, nil)
+	sshLogger.Printf("发送 shell 请求 来自 %v", sshConn.RemoteAddr())
 	req.Reply(true, nil)
 	channel.Close()
 }
 
-func handleShell(channel ssh.Channel, sshConn *ssh.ServerConn, terminal string, commands map[string]string) {
-	sshLogger.Printf("开始处理来自 %v 的shell", sshConn.RemoteAddr())
-	defer sshLogger.Printf("结束处理来自 %v 的shell", sshConn.RemoteAddr())
+func handleShell(channel ssh.Channel, sshConn *ssh.ServerConn, commands map[string]string) {
+	sshLogger.Printf("开始处理来自 %v 的 shell", sshConn.RemoteAddr())
+	defer sshLogger.Printf("结束处理来自 %v 的 shell", sshConn.RemoteAddr())
 
 	// 发送欢迎消息
-	channel.Write([]byte("\r\n欢迎来到模拟SSH服务器!\r\n"))
-	sshLogger.Printf("向客户端写入欢迎消息，来自 %v", sshConn.RemoteAddr())
+	sendWelcomeMessage(channel, sshConn)
 
-	// 发送一次shell请求
-	sshLogger.Printf("发送shell请求 来自 %v", sshConn.RemoteAddr())
-	channel.SendRequest("shell", true, nil)
-
-	if terminal == "" {
-		terminal = "xterm-256color"
-		fmt.Println("使用默认终端")
-	} else {
-		fmt.Printf("客户端终端 : %v \n", terminal)
-	}
-
-	// 模拟shell提示符
+	// 模拟 shell 提示符
 	prompt := "root@mock-ssh:~# "
 	channel.Write([]byte(prompt))
 	sshLogger.Printf("向客户端写入提示符，来自 %v", sshConn.RemoteAddr())
@@ -189,7 +218,7 @@ func handleShell(channel ssh.Channel, sshConn *ssh.ServerConn, terminal string, 
 			if err != io.EOF {
 				sshLogger.Printf("读取错误: %v", err)
 			} else {
-				sshLogger.Printf("读取到EOF，来自 :%v", sshConn.RemoteAddr())
+				sshLogger.Printf("读取到 EOF，来自 :%v", sshConn.RemoteAddr())
 			}
 			break
 		}
@@ -211,13 +240,7 @@ func handleShell(channel ssh.Channel, sshConn *ssh.ServerConn, terminal string, 
 					return
 				}
 
-				var output string
-				if val, ok := commands[command]; ok {
-					output = val
-				} else {
-					output = "bash: " + command + ": 命令未找到\n"
-				}
-
+				output := executeCommand(command, commands)
 				channel.Write([]byte("\r\n" + output))
 				sshLogger.Printf("向客户端写入 : %v，来自 %v", output, sshConn.RemoteAddr())
 				channel.Write([]byte("\r\n"))
@@ -231,38 +254,51 @@ func handleShell(channel ssh.Channel, sshConn *ssh.ServerConn, terminal string, 
 	}
 }
 
-// loadOrCreatePrivateKey 加载或创建私键
-func loadOrCreatePrivateKey(filename string) (crypto.PrivateKey, error) {
-	var privateKey crypto.PrivateKey
-	data, err := os.ReadFile(filename)
-	if err == nil {
-		block, _ := pem.Decode(data)
-		if block != nil {
-			switch block.Type {
-			case "RSA PRIVATE KEY":
-				privateKey, err = x509.ParsePKCS1PrivateKey(block.Bytes)
-			}
-		}
-	}
-	if err != nil || privateKey == nil {
-		privateKey, err = rsa.GenerateKey(rand.Reader, 2048)
-		if err != nil {
-			return nil, err
-		}
-		var pemKey = &pem.Block{
-			Type:  "RSA PRIVATE KEY",
-			Bytes: x509.MarshalPKCS1PrivateKey(privateKey.(*rsa.PrivateKey)),
-		}
-		var pemData = pem.EncodeToMemory(pemKey)
-		err = os.WriteFile(filename, pemData, 0600)
-		if err != nil {
-			return nil, err
-		}
-	}
-	return privateKey, nil
+func sendWelcomeMessage(channel ssh.Channel, sshConn *ssh.ServerConn) {
+	welcomeMsg := "\r\n欢迎来到模拟 SSH 服务器!\r\n"
+	channel.Write([]byte(welcomeMsg))
+	sshLogger.Printf("向客户端写入欢迎消息，来自 %v", sshConn.RemoteAddr())
+	channel.SendRequest("shell", true, nil)
+	sshLogger.Printf("发送 shell 请求 来自 %v", sshConn.RemoteAddr())
 }
 
-// GetServiceName 返回服务名称
-func (m *SimSSHService) GetServiceName() string {
-	return "SSH"
+func executeCommand(command string, commands map[string]string) string {
+	if val, ok := commands[command]; ok {
+		return val
+	}
+	return "bash: " + command + ": 命令未找到\n"
+}
+
+// loadOrCreatePrivateKey 加载或创建私键
+func loadOrCreatePrivateKey() (crypto.PrivateKey, error) {
+	var privateKey crypto.PrivateKey
+	data, err := config.AssetsFs.ReadFile(config.SshPrivateKey)
+	//data, err := os.ReadFile(filename)
+	if err != nil {
+		sshLogger.Fatal(err)
+	}
+	block, _ := pem.Decode(data)
+	if block != nil {
+		switch block.Type {
+		case "RSA PRIVATE KEY":
+			privateKey, err = x509.ParsePKCS1PrivateKey(block.Bytes)
+		}
+	}
+	//if err != nil || privateKey == nil {
+	//	privateKey, err = rsa.GenerateKey(rand.Reader, 2048)
+	//	if err != nil {
+	//		return nil, err
+	//	}
+	//	var pemKey = &pem.Block{
+	//		Type:  "RSA PRIVATE KEY",
+	//		Bytes: x509.MarshalPKCS1PrivateKey(privateKey.(*rsa.PrivateKey)),
+	//	}
+	//	var pemData = pem.EncodeToMemory(pemKey)
+	//	config.AssetsFs.
+	//	//err = os.WriteFile(filename, pemData, 0600)
+	//	if err != nil {
+	//		return nil, err
+	//	}
+	//}
+	return privateKey, nil
 }

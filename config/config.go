@@ -1,34 +1,54 @@
 package config
 
 import (
+	"embed"
 	"fmt"
 	"os"
 
 	"gopkg.in/yaml.v2"
 )
 
+var (
+	AssetsFs      embed.FS
+	SshPrivateKey = "assets/ssh_private.key"
+)
+
 type Config struct {
 	SSH struct {
-		Port       int               `yaml:"port"`
-		ValidUsers map[string]string `yaml:"valid_users"`
-		Commands   map[string]string `yaml:"commands"`
+		Port     string            `yaml:"port"`
+		User     string            `yaml:"user"`
+		Pass     string            `yaml:"pass"`
+		Commands map[string]string `yaml:"commands"`
 	} `yaml:"ssh"`
 	FTP struct {
-		Port           int    `yaml:"port"`
-		User           string `yaml:"user"`
-		Pass           string `yaml:"pass"`
-		ReadOnly       bool   `yaml:"read_only"`
-		WelcomeMessage string `yaml:"welcome_message"`
+		Port string `yaml:"port"`
+		User string `yaml:"user"`
+		Pass string `yaml:"pass"`
 	} `yaml:"ftp"`
+	Telnet struct {
+		Port string `yaml:"port"`
+		User string `yaml:"user"`
+		Pass string `yaml:"pass"`
+	} `yaml:"telnet"`
 	Redis struct {
-		Port     int    `yaml:"port"`
-		Username string `yaml:"username"`
-		Password string `yaml:"password"`
+		Port string `yaml:"port"`
+		User string `yaml:"user"`
+		Pass string `yaml:"pass"`
 	} `yaml:"redis"`
+	Postgres struct {
+		Port string `yaml:"port"`
+		User string `yaml:"user"`
+		Pass string `yaml:"pass"`
+	} `yaml:"postgres"`
+	MySql struct {
+		Port string `yaml:"port"`
+		User string `yaml:"user"`
+		Pass string `yaml:"pass"`
+	} `yaml:"mysql"`
 }
 
 func LoadConfig() (*Config, error) {
-	data, err := os.ReadFile(`D:\code\go\ProtoSimService\config.yaml`)
+	data, err := os.ReadFile(`D:\code\go\SimPro\config.yaml`)
 	if err != nil {
 		return nil, fmt.Errorf("读取配置文件失败: %v", err)
 	}
@@ -40,4 +60,8 @@ func LoadConfig() (*Config, error) {
 	}
 
 	return &cfg, nil
+}
+
+func GetEmbed(assets embed.FS) {
+	AssetsFs = assets
 }

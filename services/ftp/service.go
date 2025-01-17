@@ -1,10 +1,13 @@
 package ftp
 
 import (
-	"context"
+	"SimPro/common"
 	"fmt"
+	"github.com/sirupsen/logrus"
 	"log"
 	"net"
+	"strconv"
+	"sync"
 
 	"SimPro/config"
 	"SimPro/services/ftp/auth"
@@ -14,30 +17,43 @@ import (
 	"goftp.io/server/v2/driver/file"
 )
 
-// MockFTPService结构体实现MockService接口
-type SimFTPService struct{}
+var ftpLogger *logrus.Logger
 
-func (m *SimFTPService) NeedsListener() bool {
-	return true
+func init() {
+	ftpLogger = common.SetupServiceLogger("FTP", true)
 }
 
-func (m *SimFTPService) Serve(ctx context.Context, conn net.Conn) {
+type SimFTPService struct {
+	listener net.Listener
+	wg       sync.WaitGroup
+}
 
+func (s *SimFTPService) Stop() error {
+	if s.listener != nil {
+		err := s.listener.Close()
+		if err != nil {
+			return fmt.Errorf("关闭监听器失败: %v", err)
+		}
+	}
+	ftpLogger.Println("FTP 服务已停止")
+	return nil
 }
 
 // Serve方法处理FTP连接相关逻辑
-func (m *SimFTPService) ServeWithListener(ctx context.Context, listener net.Listener) {
-	cfg, err := config.LoadConfig()
-	if err != nil {
-		log.Fatalf("加载配置失败: %v", err)
-	}
+func (s *SimFTPService) Start(cfg *config.Config) error {
 
+	var err error
+	s.listener, err = net.Listen("tcp", ":"+cfg.FTP.Port)
+	if err != nil {
+		return err
+	}
+	ftpLogger.Printf("FTP 服务正在监听端口 %s", cfg.FTP.Port)
 	// 定义FTP服务器驱动
 	var ftpDriver server.Driver
 	ftpDriver, err = file.NewDriver("./")
 	if err != nil {
 		fmt.Println(err)
-		return
+		return err
 	}
 
 	// 定义FTP服务器认证方式
@@ -53,38 +69,40 @@ func (m *SimFTPService) ServeWithListener(ctx context.Context, listener net.List
 		serverAuth = &auth.ZeroAuth{}
 	}
 
+	port, err := strconv.Atoi(cfg.Postgres.Port)
 	// 组装FTP服务器选项
 	opt := &server.Options{
 		Name:           "iwebd",
 		Driver:         ftpDriver,
-		Port:           cfg.FTP.Port,
+		Port:           port,
 		Auth:           serverAuth,
 		Perm:           driver.NewFsPerm("./"),
-		WelcomeMessage: cfg.FTP.WelcomeMessage,
+		WelcomeMessage: "welcome ftp",
 	}
 
-	s, err := server.NewServer(opt)
+	sServer, err := server.NewServer(opt)
 	if err != nil {
 		log.Fatalf("Failed to serve ftp: %v", err)
-		return
+		return err
 	}
 
 	// 运行服务器
 	quitNotifier := make(chan int)
 	go func() {
-		err = s.Serve(listener)
+		err = sServer.Serve(s.listener)
 		if err != nil && err != server.ErrServerClosed {
 			log.Printf("Failed to serve ftp: %v", err)
 		}
 		quitNotifier <- 0
 	}()
 
-	// 等待服务器结束
-	<-quitNotifier
-	s.Shutdown()
+	//// 等待服务器结束
+	//<-quitNotifier
+	//sServer.Shutdown()
+	return nil
 }
 
 // GetServiceName方法返回服务名称
-func (m *SimFTPService) GetServiceName() string {
+func (m *SimFTPService) GetName() string {
 	return "FTP"
 }

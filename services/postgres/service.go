@@ -2,6 +2,7 @@ package postgres
 
 import (
 	"SimPro/common"
+	"SimPro/config"
 	"context"
 	"fmt"
 	"github.com/auxten/postgresql-parser/pkg/sql/parser"
@@ -10,28 +11,47 @@ import (
 	"github.com/sirupsen/logrus"
 	"log"
 	"net"
-	"os"
+	"sync"
 )
 
-var postgresLogger *logrus.Logger
+var (
+	postgresLogger *logrus.Logger
+	accountsList   map[string]string
+)
 
 func init() {
 	postgresLogger = common.SetupServiceLogger("Postgres", true)
 }
 
-// MockTelnetService 实现通用的MockService接口
-type SimPostgresService struct{}
-
-func (m *SimPostgresService) NeedsListener() bool {
-	return true
+type SimPostgresService struct {
+	listener net.Listener
+	wg       sync.WaitGroup
 }
 
-func (m *SimPostgresService) Serve(ctx context.Context, conn net.Conn) {
-
+func (s *SimPostgresService) Stop() error {
+	if s.listener != nil {
+		err := s.listener.Close()
+		if err != nil {
+			return fmt.Errorf("关闭监听器失败: %v", err)
+		}
+	}
+	postgresLogger.Println("Postgres 服务已停止")
+	return nil
 }
 
 // Serve方法处理FTP连接相关逻辑
-func (m *SimPostgresService) ServeWithListener(ctx context.Context, listener net.Listener) {
+func (s *SimPostgresService) Start(cfg *config.Config) error {
+
+	accountsList = map[string]string{
+		cfg.Postgres.User: cfg.Postgres.Pass,
+	}
+
+	var err error
+	s.listener, err = net.Listen("tcp", ":"+cfg.Postgres.Port)
+	if err != nil {
+		return err
+	}
+	postgresLogger.Printf("Postgres 服务正在监听端口 %s", cfg.Postgres.Port)
 	// 创建一个新的服务器实例，并设置认证策略
 	server, err := wire.NewServer(
 		handler,
@@ -39,16 +59,15 @@ func (m *SimPostgresService) ServeWithListener(ctx context.Context, listener net
 	)
 	if err != nil {
 		fmt.Println("Error creating server:", err)
-		os.Exit(1)
+		return err
 	}
-	err = server.Serve(listener)
-	if err != nil {
-		fmt.Println("Error serving:", err)
-	}
+	go server.Serve(s.listener)
+
+	return nil
 }
 
 // GetServiceName方法返回服务名称
-func (m *SimPostgresService) GetServiceName() string {
+func (s *SimPostgresService) GetName() string {
 	return "Postgres"
 }
 
@@ -56,12 +75,12 @@ func (m *SimPostgresService) GetServiceName() string {
 func authenticate(ctx context.Context, username, password string) (context.Context, bool, error) {
 	// 在这里验证用户名和密码
 	// 这个示例中只是简单地检查用户名和密码是否匹配
-	validUsers := map[string]string{
-		"root":     "123456",
-		"postgres": "123456",
-	}
+	//validUsers := map[string]string{
+	//	"root":     "123456",
+	//	"postgres": "123456",
+	//}
 
-	passwordHash, ok := validUsers[username]
+	passwordHash, ok := accountsList[username]
 	if !ok {
 		return ctx, false, fmt.Errorf("invalid username")
 	}
