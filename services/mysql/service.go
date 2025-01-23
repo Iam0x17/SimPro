@@ -23,8 +23,6 @@ var mySqlLogger *logrus.Logger
 var (
 	dbName    = "ZC"
 	tableName = "mytable"
-	address   = "localhost"
-	port      = 3306
 )
 
 func init() {
@@ -75,10 +73,10 @@ func (s *SimMySqlService) Start(cfg *config.Config) error {
 		mysqlDb.AddSuperUser(ed, cfg.MySql.User, "localhost", cfg.MySql.Pass)
 	}()
 
-	config := server.Config{
+	cfgServer := server.Config{
 		Listener: s.listener,
 	}
-	sServer, err := server.NewServer(config, engine, memory.NewSessionBuilder(pro), nil)
+	sServer, err := server.NewServer(cfgServer, engine, memory.NewSessionBuilder(pro), nil)
 	if err != nil {
 		panic(err)
 	}
@@ -95,7 +93,7 @@ func (s *SimMySqlService) Start(cfg *config.Config) error {
 
 // GetServiceName方法返回服务名称
 func (m *SimMySqlService) GetName() string {
-	return "MySql"
+	return "mysql"
 }
 
 // For go-mysql-server developers: Remember to update the snippet in the README when this file changes.

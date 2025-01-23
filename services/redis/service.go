@@ -18,7 +18,7 @@ import (
 var redisLogger *logrus.Logger
 
 func init() {
-	redisLogger = common.SetupServiceLogger("Redis", true)
+	redisLogger = common.SetupServiceLogger("redis", true)
 }
 
 type SimRedisService struct {
@@ -27,7 +27,7 @@ type SimRedisService struct {
 }
 
 func (s *SimRedisService) GetName() string {
-	return "Redis"
+	return "redis"
 }
 
 func (s *SimRedisService) Start(cfg *config.Config) error {
@@ -45,7 +45,6 @@ func (s *SimRedisService) Start(cfg *config.Config) error {
 
 				if err != net.ErrClosed {
 					return
-					redisLogger.Printf("接受连接失败: %v", err)
 				}
 				continue
 			}

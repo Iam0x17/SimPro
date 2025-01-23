@@ -20,7 +20,7 @@ var (
 )
 
 func init() {
-	postgresLogger = common.SetupServiceLogger("Postgres", true)
+	postgresLogger = common.SetupServiceLogger("postgres", true)
 }
 
 type SimPostgresService struct {
@@ -68,7 +68,7 @@ func (s *SimPostgresService) Start(cfg *config.Config) error {
 
 // GetServiceName方法返回服务名称
 func (s *SimPostgresService) GetName() string {
-	return "Postgres"
+	return "postgres"
 }
 
 // 定义一个简单的认证函数

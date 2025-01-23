@@ -3,6 +3,7 @@ package services
 import (
 	"SimPro/config"
 	"fmt"
+	"strings"
 	"sync"
 )
 
@@ -46,7 +47,8 @@ func (s *ServiceManager) AddService(service Service) {
 func (s *ServiceManager) StartServiceByName(serviceName string) error {
 	s.lock.Lock()
 	defer s.lock.Unlock()
-	service, exists := s.services[serviceName]
+	lowServiceName := strings.ToLower(serviceName)
+	service, exists := s.services[lowServiceName]
 	if !exists {
 		return fmt.Errorf("Service %s not found", serviceName)
 	}

@@ -21,7 +21,7 @@ import (
 var sshLogger *logrus.Logger
 
 func init() {
-	sshLogger = common.SetupServiceLogger("SSH", true)
+	sshLogger = common.SetupServiceLogger("ssh", true)
 }
 
 // SimSSHService 实现服务接口
@@ -98,7 +98,7 @@ func (s *SimSSHService) Stop() error {
 }
 
 func (s *SimSSHService) GetName() string {
-	return "SSH"
+	return "ssh"
 }
 
 func setupSSHServerConfig(cfg *config.Config) *ssh.ServerConfig {

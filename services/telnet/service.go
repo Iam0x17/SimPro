@@ -67,5 +67,5 @@ func (s *SimTelnetService) Start(cfg *config.Config) error {
 
 // GetServiceName方法返回服务名称
 func (m *SimTelnetService) GetName() string {
-	return "Telnet"
+	return "telnet"
 }

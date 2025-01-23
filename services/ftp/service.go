@@ -20,7 +20,7 @@ import (
 var ftpLogger *logrus.Logger
 
 func init() {
-	ftpLogger = common.SetupServiceLogger("FTP", true)
+	ftpLogger = common.SetupServiceLogger("ftp", true)
 }
 
 type SimFTPService struct {
@@ -104,5 +104,5 @@ func (s *SimFTPService) Start(cfg *config.Config) error {
 
 // GetServiceName方法返回服务名称
 func (m *SimFTPService) GetName() string {
-	return "FTP"
+	return "ftp"
 }

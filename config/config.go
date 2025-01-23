@@ -3,14 +3,14 @@ package config
 import (
 	"embed"
 	"fmt"
-	"os"
-
 	"gopkg.in/yaml.v2"
+	"os"
 )
 
 var (
 	AssetsFs      embed.FS
 	SshPrivateKey = "assets/ssh_private.key"
+	ConfigFile    = "assets/config.yaml"
 )
 
 type Config struct {
@@ -47,8 +47,16 @@ type Config struct {
 	} `yaml:"mysql"`
 }
 
-func LoadConfig() (*Config, error) {
-	data, err := os.ReadFile(`D:\code\go\SimPro\config.yaml`)
+func LoadConfig(path string) (*Config, error) {
+	var data []byte
+	var err error
+
+	if path != "" {
+		data, err = os.ReadFile(path)
+
+	} else {
+		data, err = AssetsFs.ReadFile(ConfigFile)
+	}
 	if err != nil {
 		return nil, fmt.Errorf("读取配置文件失败: %v", err)
 	}
