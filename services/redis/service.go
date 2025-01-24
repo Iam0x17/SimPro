@@ -5,6 +5,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	"go.uber.org/zap"
 	"net"
 	"strconv"
 	"strings"
@@ -12,14 +13,7 @@ import (
 	"time"
 
 	"SimPro/config"
-	"github.com/sirupsen/logrus"
 )
-
-var redisLogger *logrus.Logger
-
-func init() {
-	redisLogger = common.SetupServiceLogger("redis", true)
-}
 
 type SimRedisService struct {
 	listener net.Listener
@@ -36,8 +30,7 @@ func (s *SimRedisService) Start(cfg *config.Config) error {
 	if err != nil {
 		return err
 	}
-	redisLogger.Printf("Redis 服务正在监听端口 %s", cfg.Redis.Port)
-
+	common.Logger.Info(common.EventStartService, zap.String("protocol", "redis"), zap.String("info", fmt.Sprintf("Redis service is listening on port %s", cfg.Redis.Port)))
 	go func() {
 		for {
 			conn, err := s.listener.Accept()
@@ -63,7 +56,7 @@ func (s *SimRedisService) Stop() error {
 		}
 	}
 	s.wg.Wait()
-	redisLogger.Println("Redis 服务已停止")
+	common.Logger.Info(common.EventStopService, zap.String("protocol", "redis"), zap.String("info", "Redis service has stopped"))
 	return nil
 }
 
@@ -176,23 +169,34 @@ func handleConnection(conn net.Conn, cfg *config.Config) {
 	scanner := bufio.NewScanner(conn)
 	scanner.Split(scanRedisProtocol)
 	conn.SetReadDeadline(time.Now().Add(10 * time.Second))
+	common.Logger.Info(common.EventNewConnection, zap.String("protocol", "redis"),
+		zap.String("info", "New redis connect"),
+		zap.String("local", conn.LocalAddr().String()),
+		zap.String("remote", conn.RemoteAddr().String()))
 
 	for scanner.Scan() {
 		message := scanner.Text()
-		redisLogger.Printf("收到数据: %s", message)
+		//----
+		//redisLogger.Printf("收到数据: %s", message)
+		//fmt.Printf("收到数据: %s", message)
 
 		parts, err := parseRedisCommand(message)
 		if err != nil {
-			redisLogger.Printf("解析命令失败: %v", err)
+			common.Logger.Error("Error", zap.Error(err))
 			_, err := conn.Write([]byte("-ERR Invalid command format\r\n"))
 			if err != nil {
-				redisLogger.Printf("写入响应出错: %v", err)
+				common.Logger.Error("Error", zap.Error(err))
+				//redisLogger.Printf("写入响应出错: %v", err)
 			}
 			continue
 		}
 		if len(parts) == 0 {
 			continue
 		}
+		//common.Logger.Info(common.EventExecuteCommand, zap.String("protocol", "redis"),
+		//	zap.String("info", parts[0]),
+		//	zap.String("local", conn.LocalAddr().String()),
+		//	zap.String("remote", conn.RemoteAddr().String()))
 		switch strings.ToUpper(parts[0]) {
 		case "PING":
 			handlePingCommand(conn, authenticated)
@@ -210,33 +214,38 @@ func handleConnection(conn net.Conn, cfg *config.Config) {
 		conn.SetReadDeadline(time.Now().Add(10 * time.Second))
 	}
 	if err := scanner.Err(); err != nil {
-		redisLogger.Printf("连接断开: %v", err)
+		//common.Logger.Error("Error", zap.Error(err))
+		common.Logger.Info(common.EventCloseConnection, zap.String("protocol", "redis"),
+			zap.String("info", "close redis connect"),
+			zap.String("local", conn.LocalAddr().String()),
+			zap.String("remote", conn.RemoteAddr().String()))
 	}
 }
 
 func handlePingCommand(conn net.Conn, authenticated bool) {
 	if !authenticated {
-		redisLogger.Printf("认证需求: 需要认证才能执行PING命令")
+		//redisLogger.Printf("认证需求: 需要认证才能执行PING命令")
 		_, err := conn.Write([]byte("-NOAUTH Authentication required.\r\n"))
 		if err != nil {
-			redisLogger.Printf("写入响应出错: %v", err)
+			common.Logger.Error("Error", zap.Error(err))
 		}
 		return
 	}
-	redisLogger.Printf("收到PING命令")
+	//redisLogger.Printf("收到PING命令")
 	_, err := conn.Write([]byte("+PONG\r\n"))
 	if err != nil {
-		redisLogger.Printf("写入响应出错: %v", err)
+		common.Logger.Error("Error", zap.Error(err))
 	}
 }
 
 func handleAuthCommand(conn net.Conn, parts []string, cfg *config.Config) {
-	redisLogger.Printf("收到AUTH命令")
+	//redisLogger.Printf("收到AUTH命令")
 	if len(parts) < 2 {
-		redisLogger.Printf("无效认证参数")
+		//redisLogger.Printf("无效认证参数")
 		_, err := conn.Write([]byte("-ERR Invalid AUTH parameters\r\n"))
 		if err != nil {
-			redisLogger.Printf("写入响应出错: %v", err)
+			//redisLogger.Printf("写入响应出错: %v", err)
+			common.Logger.Error("Error", zap.Error(err))
 		}
 		return
 	}
@@ -248,25 +257,41 @@ func handleAuthCommand(conn net.Conn, parts []string, cfg *config.Config) {
 		providedUsername = parts[1]
 		providedPassword = parts[2]
 	} else {
-		redisLogger.Printf("无效认证参数")
+		//redisLogger.Printf("无效认证参数")
 		_, err := conn.Write([]byte("-ERR Invalid AUTH parameters\r\n"))
 		if err != nil {
-			redisLogger.Printf("写入响应出错: %v", err)
+			//redisLogger.Printf("写入响应出错: %v", err)
+			common.Logger.Error("Error", zap.Error(err))
 		}
 		return
 	}
 	if (cfg.Redis.User == "" || providedUsername == cfg.Redis.User) && providedPassword == cfg.Redis.Pass {
-		redisLogger.Printf("认证成功")
+		//redisLogger.Printf("认证成功")
 		//_, err := conn.Write([]byte("+OK Authentication successful.\r\n"))
+		common.Logger.Info(common.EventAccountLogin,
+			zap.String("protocol", "redis"),
+			zap.String("info", "Login succeeded"),
+			zap.String("account", providedUsername),
+			zap.String("password", providedPassword),
+			zap.String("local", conn.LocalAddr().String()),
+			zap.String("remote", conn.RemoteAddr().String()))
 		_, err := conn.Write([]byte("+OK\r\n"))
 		if err != nil {
-			redisLogger.Printf("写入响应出错: %v", err)
+			//redisLogger.Printf("写入响应出错: %v", err)
+			common.Logger.Error("Error", zap.Error(err))
 		}
 	} else {
-		redisLogger.Printf("认证失败")
+		//redisLogger.Printf("认证失败")
+		common.Logger.Info(common.EventAccountLogin,
+			zap.String("protocol", "redis"),
+			zap.String("info", "Login failed"),
+			zap.String("account", providedUsername),
+			zap.String("password", providedPassword),
+			zap.String("local", conn.LocalAddr().String()),
+			zap.String("remote", conn.RemoteAddr().String()))
 		_, err := conn.Write([]byte("-ERR invalid password\r\n"))
 		if err != nil {
-			redisLogger.Printf("写入响应出错: %v", err)
+			common.Logger.Error("Error", zap.Error(err))
 		}
 	}
 }
@@ -285,67 +310,71 @@ func handleAuthentication(parts []string, cfg *config.Config) bool {
 
 func handleSetCommand(conn net.Conn, parts []string, authenticated bool) {
 	if !authenticated {
-		redisLogger.Printf("认证需求: 需要认证才能执行SET命令")
+		//redisLogger.Printf("认证需求: 需要认证才能执行SET命令")
 		_, err := conn.Write([]byte("-NOAUTH Authentication required.\r\n"))
 		if err != nil {
-			redisLogger.Printf("写入响应出错: %v", err)
+			common.Logger.Error("Error", zap.Error(err))
 		}
 		return
 	}
 	if len(parts) < 3 {
-		redisLogger.Printf("SET命令参数无效")
+		//redisLogger.Printf("SET命令参数无效")
 		_, err := conn.Write([]byte("-ERR wrong number of arguments for 'set'\r\n"))
 		if err != nil {
-			redisLogger.Printf("写入响应出错: %v", err)
+			common.Logger.Error("Error", zap.Error(err))
 		}
 		return
 	}
-	key := parts[1]
-	value := strings.Join(parts[2:], " ")
-	redisLogger.Printf("执行SET命令，键: %s, 值: %s", key, value)
+	//key := parts[1]
+	//value := strings.Join(parts[2:], " ")
+	//----
+	//redisLogger.Printf("执行SET命令，键: %s, 值: %s", key, value)
+	//fmt.Printf("执行SET命令，键: %s, 值: %s", key, value)
 	_, err := conn.Write([]byte("+OK\r\n"))
 	if err != nil {
-		redisLogger.Printf("写入响应出错: %v", err)
+		common.Logger.Error("Error", zap.Error(err))
 	}
 }
 
 func handleGetCommand(conn net.Conn, parts []string, authenticated bool) {
 	if !authenticated {
-		redisLogger.Printf("认证需求: 需要认证才能执行GET命令")
+		//redisLogger.Printf("认证需求: 需要认证才能执行GET命令")
 		_, err := conn.Write([]byte("-NOAUTH Authentication required.\r\n"))
 		if err != nil {
-			redisLogger.Printf("写入响应出错: %v", err)
+			common.Logger.Error("Error", zap.Error(err))
 		}
 		return
 	}
 	if len(parts) < 2 {
-		redisLogger.Printf("GET命令参数无效")
+		//redisLogger.Printf("GET命令参数无效")
 		_, err := conn.Write([]byte("-ERR wrong number of arguments for 'get'\r\n"))
 		if err != nil {
-			redisLogger.Printf("写入响应出错: %v", err)
+			common.Logger.Error("Error", zap.Error(err))
 		}
 		return
 	}
-	key := parts[1]
-	redisLogger.Printf("执行GET命令，键: %s", key)
+	//key := parts[1]
+	//redisLogger.Printf("执行GET命令，键: %s", key)
+	//----
+	//fmt.Printf("执行GET命令，键: %s", key)
 	_, err := conn.Write([]byte("$0\r\n\r\n"))
 	if err != nil {
-		redisLogger.Printf("写入响应出错: %v", err)
+		common.Logger.Error("Error", zap.Error(err))
 	}
 }
 
 func handleUnknownCommand(conn net.Conn, authenticated bool) {
 	if !authenticated {
-		redisLogger.Printf("认证需求: 需要认证才能执行该命令")
+		//redisLogger.Printf("认证需求: 需要认证才能执行该命令")
 		_, err := conn.Write([]byte("-NOAUTH Authentication required.\r\n"))
 		if err != nil {
-			redisLogger.Printf("写入响应出错: %v", err)
+			common.Logger.Error("Error", zap.Error(err))
 		}
 		return
 	}
-	redisLogger.Printf("收到未知命令")
+	//redisLogger.Printf("收到未知命令")
 	_, err := conn.Write([]byte("-ERR Unknown command\r\n"))
 	if err != nil {
-		redisLogger.Printf("写入响应出错: %v", err)
+		common.Logger.Error("Error", zap.Error(err))
 	}
 }

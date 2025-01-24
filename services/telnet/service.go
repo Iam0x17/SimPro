@@ -3,18 +3,13 @@ package telnet
 import (
 	"SimPro/common"
 	"SimPro/config"
+	"fmt"
 	"github.com/globalcyberalliance/telnet-go"
 	"github.com/globalcyberalliance/telnet-go/shell"
-	"github.com/sirupsen/logrus"
+	"go.uber.org/zap"
 	"net"
 	"sync"
 )
-
-var telnetLogger *logrus.Logger
-
-func init() {
-	telnetLogger = common.SetupServiceLogger("Telnet", true)
-}
 
 // MockTelnetService 实现通用的MockService接口
 type SimTelnetService struct {
@@ -30,7 +25,7 @@ func (s *SimTelnetService) Stop() error {
 		}
 	}
 	s.wg.Wait()
-	telnetLogger.Println("Telnet 服务已停止")
+	common.Logger.Info(common.EventStopService, zap.String("protocol", "telnet"), zap.String("info", "Telnet service has stopped"))
 	return nil
 }
 
@@ -42,7 +37,8 @@ func (s *SimTelnetService) Start(cfg *config.Config) error {
 	if err != nil {
 		return err
 	}
-	telnetLogger.Printf("Telnet 服务正在监听端口 %s", cfg.Telnet.Port)
+	//telnetLogger.Printf("Telnet 服务正在监听端口 %s", cfg.Telnet.Port)
+	common.Logger.Info(common.EventStartService, zap.String("protocol", "telnet"), zap.String("info", fmt.Sprintf("Telnet service is listening on port %s", cfg.Telnet.Port)))
 	authHandler := shell.NewAuthHandler(cfg.Telnet.User, cfg.Telnet.Pass, 3)
 	commands := []shell.Command{
 		{
