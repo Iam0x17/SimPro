@@ -3,7 +3,7 @@ package ftp
 import (
 	"SimPro/common"
 	"fmt"
-	"github.com/sirupsen/logrus"
+	"go.uber.org/zap"
 	"log"
 	"net"
 	"strconv"
@@ -17,12 +17,6 @@ import (
 	"goftp.io/server/v2/driver/file"
 )
 
-var ftpLogger *logrus.Logger
-
-func init() {
-	ftpLogger = common.SetupServiceLogger("ftp", true)
-}
-
 type SimFTPService struct {
 	listener net.Listener
 	wg       sync.WaitGroup
@@ -32,10 +26,11 @@ func (s *SimFTPService) Stop() error {
 	if s.listener != nil {
 		err := s.listener.Close()
 		if err != nil {
-			return fmt.Errorf("关闭监听器失败: %v", err)
+			return err
 		}
 	}
-	ftpLogger.Println("FTP 服务已停止")
+	common.Logger.Info(common.EventStopService, zap.String("protocol", "ftp"), zap.String("info", "FTP service has stopped"))
+	//ftpLogger.Println("FTP 服务已停止")
 	return nil
 }
 
@@ -47,7 +42,8 @@ func (s *SimFTPService) Start(cfg *config.Config) error {
 	if err != nil {
 		return err
 	}
-	ftpLogger.Printf("FTP 服务正在监听端口 %s", cfg.FTP.Port)
+	common.Logger.Info(common.EventStartService, zap.String("protocol", "ftp"), zap.String("info", fmt.Sprintf("FTP service is listening on port %s", cfg.FTP.Port)))
+	//ftpLogger.Printf("FTP 服务正在监听端口 %s", cfg.FTP.Port)
 	// 定义FTP服务器驱动
 	var ftpDriver server.Driver
 	ftpDriver, err = file.NewDriver("./")

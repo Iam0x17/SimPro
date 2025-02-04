@@ -5,6 +5,7 @@ import (
 	"SimPro/config"
 	"context"
 	"fmt"
+	"go.uber.org/zap"
 	"net"
 	"sync"
 	"time"
@@ -15,19 +16,12 @@ import (
 	"github.com/dolthub/go-mysql-server/sql"
 	"github.com/dolthub/go-mysql-server/sql/types"
 	"github.com/dolthub/vitess/go/vt/proto/query"
-	"github.com/sirupsen/logrus"
 )
-
-var mySqlLogger *logrus.Logger
 
 var (
 	dbName    = "ZC"
 	tableName = "mytable"
 )
-
-func init() {
-	mySqlLogger = common.SetupServiceLogger("MySql", true)
-}
 
 // SimMysqlService 实现通用的MockService接口
 type SimMySqlService struct {
@@ -41,10 +35,11 @@ func (s *SimMySqlService) Stop() error {
 		s.running = false
 		err := s.listener.Close()
 		if err != nil {
-			return fmt.Errorf("关闭监听器失败: %v", err)
+			return err
 		}
 	}
-	mySqlLogger.Println("MySql 服务已停止")
+	common.Logger.Info(common.EventStopService, zap.String("mysql", "postgres"), zap.String("info", "MySql service has stopped"))
+	//mySqlLogger.Println("MySql 服务已停止")
 	return nil
 }
 
@@ -56,8 +51,8 @@ func (s *SimMySqlService) Start(cfg *config.Config) error {
 	if err != nil {
 		return err
 	}
-	mySqlLogger.Printf("MySql 服务正在监听端口 %s", cfg.MySql.Port)
 
+	common.Logger.Info(common.EventStartService, zap.String("protocol", "telnet"), zap.String("info", fmt.Sprintf("Telnet service is listening on port %s", cfg.MySql.Port)))
 	pro := createTestDatabase()
 	engine := sqle.NewDefault(pro)
 

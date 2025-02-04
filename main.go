@@ -56,7 +56,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("路径:" + opts.ConfigPath)
+	//fmt.Println("路径:" + opts.ConfigPath)
 	cfg, err := config.LoadConfig(opts.ConfigPath)
 	if err != nil {
 		log.Fatalf("加载配置失败: %v", err)

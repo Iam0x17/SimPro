@@ -8,20 +8,15 @@ import (
 	"github.com/auxten/postgresql-parser/pkg/sql/parser"
 	wire "github.com/jeroenrinzema/psql-wire"
 	"github.com/lib/pq/oid"
-	"github.com/sirupsen/logrus"
+	"go.uber.org/zap"
 	"log"
 	"net"
 	"sync"
 )
 
 var (
-	postgresLogger *logrus.Logger
-	accountsList   map[string]string
+	accountsList map[string]string
 )
-
-func init() {
-	postgresLogger = common.SetupServiceLogger("postgres", true)
-}
 
 type SimPostgresService struct {
 	listener net.Listener
@@ -32,10 +27,11 @@ func (s *SimPostgresService) Stop() error {
 	if s.listener != nil {
 		err := s.listener.Close()
 		if err != nil {
-			return fmt.Errorf("关闭监听器失败: %v", err)
+			return err
 		}
 	}
-	postgresLogger.Println("Postgres 服务已停止")
+	common.Logger.Info(common.EventStopService, zap.String("protocol", "postgres"), zap.String("info", "Postgres service has stopped"))
+	//postgresLogger.Println("Postgres 服务已停止")
 	return nil
 }
 
@@ -51,7 +47,8 @@ func (s *SimPostgresService) Start(cfg *config.Config) error {
 	if err != nil {
 		return err
 	}
-	postgresLogger.Printf("Postgres 服务正在监听端口 %s", cfg.Postgres.Port)
+	common.Logger.Info(common.EventStartService, zap.String("protocol", "postgres"), zap.String("info", fmt.Sprintf("Postgres service is listening on port %s", cfg.Postgres.Port)))
+	//postgresLogger.Printf("Postgres 服务正在监听端口 %s", cfg.Postgres.Port)
 	// 创建一个新的服务器实例，并设置认证策略
 	server, err := wire.NewServer(
 		handler,
