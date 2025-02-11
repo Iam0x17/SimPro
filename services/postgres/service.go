@@ -3,13 +3,11 @@ package postgres
 import (
 	"SimPro/common"
 	"SimPro/config"
+	wire "SimPro/pkg/psql-wire"
 	"context"
 	"fmt"
-	"github.com/auxten/postgresql-parser/pkg/sql/parser"
-	wire "github.com/jeroenrinzema/psql-wire"
 	"github.com/lib/pq/oid"
 	"go.uber.org/zap"
-	"log"
 	"net"
 	"sync"
 )
@@ -31,11 +29,9 @@ func (s *SimPostgresService) Stop() error {
 		}
 	}
 	common.Logger.Info(common.EventStopService, zap.String("protocol", "postgres"), zap.String("info", "Postgres service has stopped"))
-	//postgresLogger.Println("Postgres 服务已停止")
 	return nil
 }
 
-// Serve方法处理FTP连接相关逻辑
 func (s *SimPostgresService) Start(cfg *config.Config) error {
 
 	accountsList = map[string]string{
@@ -48,7 +44,6 @@ func (s *SimPostgresService) Start(cfg *config.Config) error {
 		return err
 	}
 	common.Logger.Info(common.EventStartService, zap.String("protocol", "postgres"), zap.String("info", fmt.Sprintf("Postgres service is listening on port %s", cfg.Postgres.Port)))
-	//postgresLogger.Printf("Postgres 服务正在监听端口 %s", cfg.Postgres.Port)
 	// 创建一个新的服务器实例，并设置认证策略
 	server, err := wire.NewServer(
 		handler,
@@ -63,7 +58,6 @@ func (s *SimPostgresService) Start(cfg *config.Config) error {
 	return nil
 }
 
-// GetServiceName方法返回服务名称
 func (s *SimPostgresService) GetName() string {
 	return "postgres"
 }
@@ -114,27 +108,36 @@ var table = wire.Columns{
 }
 
 func handler(ctx context.Context, query string) (wire.PreparedStatements, error) {
-	log.Println("incoming SQL query:", query)
-
+	//log.Println("incoming SQL query:", query)
 	// handle := func(ctx context.Context, writer wire.DataWriter, parameters []wire.Parameter) error {
 	// 	writer.Row([]any{"John", true, 29})
 	// 	writer.Row([]any{"Marry", false, 21})
 	// 	return writer.Complete("SELECT 2")
 	// }
-
+	params := wire.ServerParameters(ctx)
+	//fmt.Println(params)
+	raddr := wire.RemoteAddress(ctx)
+	//zc := params["session_authorization"]
 	// return wire.Prepared(wire.NewStatement(handle, wire.WithColumns(table))), nil
 	// 使用 postgresql-parser 解析 SQL 查询
-	stmt, err := parser.Parse(query)
-	if err != nil {
-		return nil, fmt.Errorf("failed to parse query: %v", err)
-	}
+	//stmt, err := parser.Parse(query)
+	//if err != nil {
+	//	return nil, fmt.Errorf("failed to parse query: %v", err)
+	//}
 
 	// 在这里，你可以对解析后的语句进行处理，例如打印或执行查询
-	fmt.Println("Parsed query:", stmt)
+	//fmt.Println("Parsed query:", stmt)
+
+	common.Logger.Info(common.EventExecuteCommand,
+		zap.String("protocol", "postgres"),
+		zap.String("account", params["session_authorization"]),
+		zap.String("info", query),
+		zap.String("local", "local"),
+		zap.String("remote", raddr.String()))
 
 	// 返回一个准备好的语句，这里我们只是简单地打印查询并返回一个成功状态
 	return wire.Prepared(wire.NewStatement(func(ctx context.Context, writer wire.DataWriter, parameters []wire.Parameter) error {
-		fmt.Println("Executing query:", query)
+		//fmt.Println("Executing query:", query)
 		return writer.Complete("OK")
 	}, wire.WithColumns(table))), nil
 }

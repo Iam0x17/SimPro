@@ -1,0 +1,58 @@
+name: checks
+on: 
+  - push
+  - pull_request
+
+env:
+  GOPROXY: https://goproxy.io,direct
+  GOPATH: /go_path
+  GOCACHE: /go_cache
+
+jobs:
+  lint:
+    name: check and test
+    runs-on: ubuntu-latest
+    steps:
+      # - name: cache go path
+      #   id: cache-go-path
+      #   uses: https://github.com/actions/cache@v3
+      #   with:
+      #     path: /go_path
+      #     key: go_path-${{ github.repository }}-${{ github.ref_name }}
+      #     restore-keys: |
+      #       go_path-${{ github.repository }}-
+      #       go_path-                                    
+      # - name: cache go cache
+      #   id: cache-go-cache
+      #   uses: https://github.com/actions/cache@v3
+      #   with:
+      #     path: /go_cache
+      #     key: go_cache-${{ github.repository }}-${{ github.ref_name }}
+      #     restore-keys: |
+      #       go_cache-${{ github.repository }}-
+      #       go_cache-                            
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.20
+      - uses: https://github.com/actions/checkout@v3
+      - name: lint
+        run: go install golang.org/x/lint/golint@latest && golint ./...
+      - name: vet
+        run: go vet ./...
+      - name: test
+        run: go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
+        env:
+          MINIO_SERVER_ENDPOINT: minio:9000
+          MINIO_SERVER_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
+          MINIO_SERVER_SECRET_KEY: ${{ secrets.aws_secret_access_key }}
+          MINIO_SERVER_BUCKET: test
+    services:
+      minio:
+        image: minio/minio:RELEASE.2022-07-24T01-54-52Z
+        env:
+          MINIO_ACCESS_KEY: ${{ secrets.aws_access_key_id }}
+          MINIO_SECRET_KEY: ${{ secrets.aws_secret_access_key }}
+        cmd: 
+          - 'minio'
+          - 'server'
+          - '/data'

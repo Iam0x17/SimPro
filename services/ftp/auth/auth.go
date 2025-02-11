@@ -1,6 +1,6 @@
 package auth
 
-import "goftp.io/server/v2"
+import "SimPro/pkg/goftp.io/server/v2"
 
 // Authentication scheme that accepts each user/password combination
 type ZeroAuth struct{}

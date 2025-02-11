@@ -10,11 +10,11 @@ import (
 	"sync"
 	"time"
 
-	sqle "github.com/dolthub/go-mysql-server"
-	"github.com/dolthub/go-mysql-server/memory"
-	"github.com/dolthub/go-mysql-server/server"
-	"github.com/dolthub/go-mysql-server/sql"
-	"github.com/dolthub/go-mysql-server/sql/types"
+	sqle "SimPro/pkg/go-mysql-server"
+	"SimPro/pkg/go-mysql-server/memory"
+	"SimPro/pkg/go-mysql-server/server"
+	"SimPro/pkg/go-mysql-server/sql"
+	"SimPro/pkg/go-mysql-server/sql/types"
 	"github.com/dolthub/vitess/go/vt/proto/query"
 )
 
@@ -38,7 +38,7 @@ func (s *SimMySqlService) Stop() error {
 			return err
 		}
 	}
-	common.Logger.Info(common.EventStopService, zap.String("mysql", "postgres"), zap.String("info", "MySql service has stopped"))
+	common.Logger.Info(common.EventStopService, zap.String("protocol", "mysql"), zap.String("info", "MySql service has stopped"))
 	//mySqlLogger.Println("MySql 服务已停止")
 	return nil
 }
@@ -52,7 +52,7 @@ func (s *SimMySqlService) Start(cfg *config.Config) error {
 		return err
 	}
 
-	common.Logger.Info(common.EventStartService, zap.String("protocol", "telnet"), zap.String("info", fmt.Sprintf("Telnet service is listening on port %s", cfg.MySql.Port)))
+	common.Logger.Info(common.EventStartService, zap.String("protocol", "mysql"), zap.String("info", fmt.Sprintf("MySql service is listening on port %s", cfg.MySql.Port)))
 	pro := createTestDatabase()
 	engine := sqle.NewDefault(pro)
 

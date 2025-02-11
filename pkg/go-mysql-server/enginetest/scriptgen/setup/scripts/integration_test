@@ -1,0 +1,3274 @@
+exec
+create table T52LX (
+	id varchar(24) not null,
+	DZLIM varchar(100) not null,
+	F3YUE varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY VAEXO (DZLIM)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table YYBCX (
+	id varchar(24) not null,
+	ESFVY varchar(100) not null,
+	SL76B varchar(100) not null,
+	GE5EL double,
+	F7A4Q double,
+	TUV25 double,
+	YKSSU varchar(1000),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY WITSV (ESFVY),
+	UNIQUE KEY CEAF3 (SL76B)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table XGSJM (
+	id varchar(24) not null,
+	DZLIM varchar(100) not null,
+	F3YUE varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY CQIIE (DZLIM)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table WE72E (
+	id varchar(24) not null,
+	QZ7E7 varchar(100) not null,
+	SSHPJ varchar(100) not null,
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY SOCSM (SSHPJ),
+	UNIQUE KEY LOW5B (QZ7E7)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table TNMXI (
+	id varchar(24) not null,
+	DZLIM varchar(100) not null,
+	F3YUE varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY TCKRP (DZLIM)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table F35MI (
+	id varchar(24) not null,
+	DZLIM varchar(100) not null,
+	F3YUE varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY FTWOK (DZLIM)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table E2I7U (
+	id varchar(24) not null,
+	DKCAJ varchar(24) not null,
+	KNG7T varchar(24),
+	TW55N varchar(100) not null,
+	QRQXW double not null,
+	ECXAJ double not null,
+	FGG57 varchar(100),
+	ZH72S varchar(100),
+	FSK67 varchar(100) not null,
+	XQDYT varchar(24) not null,
+	TCE7A double,
+	IWV2H double,
+	HPCMS varchar(24) not null,
+	N5CC2 varchar(1000),
+	FHCYT varchar(1000),
+	ETAQ7 double,
+	A75X7 double,
+	PRIMARY KEY (id),
+	KEY XQDYT (XQDYT),
+	KEY KNG7T (KNG7T),
+	KEY URBSA (ZH72S),
+	KEY HPCMS (HPCMS),
+	KEY DKCAJ (DKCAJ),
+	UNIQUE KEY TKKOQ (FGG57),
+	UNIQUE KEY SFMWS (TW55N),
+	constraint NEPLHKGH foreign key (XQDYT) references XGSJM (id) on delete cascade on update cascade,
+	constraint ZANIGGZJ foreign key (KNG7T) references WE72E (id) on delete cascade on update cascade,
+	constraint GYIuPKNP foreign key (HPCMS) references TNMXI (id) on delete cascade on update cascade,
+	constraint VOLFAYOL foreign key (DKCAJ) references F35MI (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table IIISV (
+	id varchar(24) not null,
+	DZLIM varchar(100) not null,
+	F3YUE varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY PGYTV (DZLIM)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table ARLV5 (
+	id varchar(24) not null,
+	LUEVY varchar(24) not null,
+	F6NSZ varchar(24) not null,
+	PRIMARY KEY (id),
+	KEY F6NSZ (F6NSZ),
+	KEY LUEVY (LUEVY),
+	UNIQUE KEY G3AVB (LUEVY, F6NSZ),
+	constraint MPYOIDMG foreign key (LUEVY) references E2I7U (id) on delete cascade on update cascade,
+	constraint RMWuWBGS foreign key (F6NSZ) references IIISV (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table EPZU6 (
+	id varchar(24) not null,
+	TOFPN varchar(100) not null,
+	SJYN2 varchar(100) not null,
+	BTXC5 varchar(100) not null,
+	FVUCX varchar(100) not null,
+	SWCQV int not null,
+	YKSSU varchar(1000),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	KEY EUOFY (BTXC5),
+	KEY SZ5IY (TOFPN),
+	KEY LJD63 (SJYN2),
+	KEY LP75T (FVUCX)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table S3FQX (
+	id varchar(24) not null,
+	ADWYM tinyint not null,
+	FPUYA tinyint not null,
+	PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table RLOHD (
+	id varchar(24) not null,
+	LUEVY varchar(24) not null,
+	LIILR double,
+	KSFXH double,
+	KLMAU double,
+	ecm double,
+	RQI4M varchar(1000),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY HVHB5 (LUEVY),
+	constraint BPWTWuWC foreign key (LUEVY) references E2I7U (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table SFEGG (
+	id varchar(24) not null,
+	NO52D varchar(100) not null,
+	VYO5E varchar(100),
+	DKCAJ varchar(24) not null,
+	ADURZ int not null,
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY DKRQA (NO52D, VYO5E, DKCAJ),
+	KEY DKCAJ (DKCAJ),
+	constraint TLBCIFRR foreign key (DKCAJ) references F35MI (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table OUBDL (
+	id varchar(24) not null,
+	FTQLQ varchar(100),
+	ZH72S varchar(200),
+	SFJ6L varchar(2500),
+	V5DPX varchar(100),
+	LJLUM varchar(100),
+	IDPK7 varchar(100),
+	NO52D varchar(100),
+	ZRV3B varchar(100),
+	VYO5E varchar(100),
+	YKSSU text,
+	FHCYT text,
+	QZ6VT varchar(1000),
+	PRIMARY KEY (id),
+	KEY IRMAC (NO52D),
+	KEY SVIT7 (FTQLQ),
+	KEY CZWS6 (V5DPX),
+	KEY JFRPY (ZH72S)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table SISUT (
+	id varchar(24) not null,
+	T4IBQ varchar(100),
+	ZH72S varchar(100),
+	AMYXQ varchar(100),
+	KTNZ2 varchar(100),
+	HIID2 varchar(100),
+	DN3OQ varchar(100),
+	VVKNB varchar(100),
+	SH7TP varchar(100),
+	SRZZO varchar(100),
+	QZ6VT varchar(100),
+	PRIMARY KEY (id),
+	KEY TTQYJ (T4IBQ),
+	KEY Z7LT5 (ZH72S)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table NZKPM (
+	id varchar(24) not null,
+	T4IBQ varchar(100),
+	FGG57 varchar(100),
+	SSHPJ varchar(100),
+	NLA6O varchar(100),
+	SFJ6L varchar(100),
+	TJPT7 varchar(100),
+	ARN5P varchar(200),
+	SYPKF varchar(100),
+	IVFMK varchar(100),
+	IDE43 varchar(500),
+	AZ6SP varchar(500),
+	FSDY2 varchar(100),
+	XOSD4 varchar(200),
+	HMW4H varchar(100),
+	S76OM varchar(100),
+	vaf varchar(100),
+	ZROH6 varchar(100),
+	QCGTS varchar(100),
+	LNFM6 varchar(100),
+	TVAWL varchar(100),
+	HDLCL varchar(100),
+	BHHW6 varchar(100),
+	FHCYT varchar(1000),
+	QZ6VT varchar(1000),
+	PRIMARY KEY (id),
+	KEY UFF3F (T4IBQ),
+	KEY FXQHW (FGG57)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table JMRQL (
+	id varchar(24) not null,
+	DZLIM varchar(100) not null,
+	F3YUE varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY LYX3G (DZLIM)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table SZW6V (
+	id varchar(24) not null,
+	T4IBQ varchar(100) not null,
+	V7UFH varchar(100) not null,
+	SYPKF varchar(100) not null,
+	H4DMT varchar(100) not null,
+	SWCQV int not null,
+	YKSSU varchar(1000),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	KEY SPZMU (T4IBQ),
+	KEY GGI5L (SYPKF),
+	KEY UTKLA (V7UFH),
+	KEY EMW6Y (H4DMT)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table XOAOP (
+	id varchar(24) not null,
+	DZLIM varchar(100) not null,
+	F3YUE varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY THCUL (DZLIM)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table JJGQT (
+	id varchar(24) not null,
+	CH3FR varchar(24) not null,
+	LUEVY varchar(24) not null,
+	PRIMARY KEY (id),
+	KEY CH3FR (CH3FR),
+	UNIQUE KEY QHY76 (LUEVY),
+	constraint DRBJBJAI foreign key (LUEVY) references E2I7U (id) on delete cascade on update cascade,
+	constraint HZHLDWSR foreign key (CH3FR) references XOAOP (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table TPXHZ (
+	id varchar(24) not null,
+	SVAZ4 varchar(100) not null,
+	PRIMARY KEY (id),
+	UNIQUE KEY SVAZ4 (SVAZ4)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table YK2GW (
+	id varchar(24) not null,
+	FTQLQ varchar(100) not null,
+	TUXML varchar(100),
+	PAEF5 varchar(100),
+	RUCY4 varchar(100),
+	TPNJ6 varchar(100) not null,
+	LBL53 varchar(100),
+	NB3QS varchar(100),
+	EO7IV varchar(100),
+	MUHJF varchar(100),
+	FM34L text,
+	TY5RF text,
+	ZHTLH text,
+	NPB7W text,
+	SX3HH text,
+	ISBNF text,
+	YA7YB text,
+	C5YKB text,
+	QK7KT text,
+	FFGE6 text,
+	FIIGJ text,
+	SH3NC text,
+	NTENA text,
+	M4AUB text,
+	X5AIR text,
+	SAB6M text,
+	G5QI5 text,
+	ZVQVD text,
+	YKSSU varchar(1000),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	KEY TU5AX (LBL53),
+	KEY C7DFM (NB3QS),
+	KEY NFJNB (EO7IV),
+	KEY TWFWA (MUHJF),
+	UNIQUE KEY FEGLT (PAEF5),
+	UNIQUE KEY T3X5H (TUXML),
+	UNIQUE KEY EZCTT (FTQLQ)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table IJLXP (
+	id varchar(24) not null,
+	WZP3R varchar(100) not null,
+	IXUXU varchar(24) not null,
+	PRIMARY KEY (id),
+	KEY IXUXU (IXUXU),
+	UNIQUE KEY IFQUF (WZP3R, IXUXU),
+	constraint YWSOXPJG foreign key (IXUXU) references YK2GW (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table HU5A5 (
+	id varchar(24) not null,
+	TOFPN varchar(100) not null,
+	I3VTA varchar(200) not null,
+	SFJ6L varchar(2500),
+	V5DPX varchar(100) not null,
+	LJLUM varchar(100) not null,
+	IDPK7 varchar(100) not null,
+	NO52D varchar(100) not null,
+	ZRV3B varchar(100) not null,
+	VYO5E varchar(100),
+	SWCQV int not null,
+	YKSSU varchar(1000),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	KEY UYQR2 (TOFPN),
+	KEY Z2WXS (I3VTA)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table JDLNA (
+	id varchar(24) not null,
+	FTQLQ varchar(100) not null,
+	FWWIQ varchar(100),
+	O3QXW varchar(100),
+	FHCYT text,
+	PRIMARY KEY (id),
+	UNIQUE KEY XDW7Z (FTQLQ)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table FCBVZ (
+	id varchar(24) not null,
+	FZ2R5 varchar(24) not null,
+	J6B7H double not null,
+	BMNNY double not null,
+	PRIMARY KEY (id),
+	UNIQUE KEY IC4BT (FZ2R5),
+	constraint XDGOFPLT foreign key (FZ2R5) references JDLNA (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table IMJ6V (
+	id varchar(24) not null,
+	FTQLQ varchar(100),
+	BACOW varchar(100),
+	PRIMARY KEY (id),
+	KEY EUAEL (BACOW),
+	KEY C7XE4 (FTQLQ)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table TPXBU (
+	id varchar(24) not null,
+	BTXC5 varchar(100),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY UZ6GK (BTXC5)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table THNTS (
+	id varchar(24) not null,
+	NFRYN varchar(24) not null,
+	IXUXU varchar(24),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	KEY NFRYN (NFRYN),
+	KEY IXUXU (IXUXU),
+	constraint PVRKLKKQ foreign key (NFRYN) references JMRQL (id) on delete cascade on update cascade,
+	constraint uIRGWEWQ foreign key (IXUXU) references YK2GW (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table HGMQ6 (
+	id varchar(24) not null,
+	GXLUB varchar(24) not null,
+	LUEVY varchar(24) not null,
+	M22QN varchar(24) not null,
+	TJPT7 varchar(100) not null,
+	ARN5P varchar(200) not null,
+	XOSD4 varchar(200) not null,
+	IDE43 varchar(500),
+	HMW4H varchar(100),
+	ZBT6R int,
+	FSDY2 varchar(100) not null,
+	LT7K6 double,
+	SPPYD double,
+	QCGTS double,
+	TEUJA varchar(24),
+	QQV4M varchar(24),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	KEY M22QN (M22QN),
+	KEY GXLUB (GXLUB),
+	KEY QQV4M (QQV4M),
+	KEY LUEVY (LUEVY),
+	KEY TEUJA (TEUJA),
+	constraint ZTDIWKIu foreign key (TEUJA) references NZKPM (id) on delete cascade on update cascade,
+	constraint OPENAEGM foreign key (LUEVY) references E2I7U (id) on delete cascade on update cascade,
+	constraint GRXCIZOK foreign key (QQV4M) references SZW6V (id) on delete cascade on update cascade,
+	constraint VMJAAVNQ foreign key (M22QN) references TPXBU (id) on delete cascade on update cascade,
+	constraint XOVPPACH foreign key (GXLUB) references THNTS (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table D34QP (
+	id varchar(24) not null,
+	TWMSR varchar(100) not null,
+	QHMGE varchar(1000),
+	MLNPU varchar(100) not null,
+	FI3GA varchar(100) not null,
+	ZNP4P varchar(100) not null,
+	PRIMARY KEY (id),
+	UNIQUE KEY LZLGJ (FI3GA),
+	UNIQUE KEY F2C6B (TWMSR)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table SEQS3 (
+	id varchar(24) not null,
+	Z7CP5 varchar(24) not null,
+	YH4XB varchar(24) not null,
+	PRIMARY KEY (id),
+	KEY Z7CP5 (Z7CP5),
+	UNIQUE KEY SQKGT (Z7CP5, YH4XB),
+	KEY YH4XB (YH4XB),
+	constraint OCPWMCFX foreign key (YH4XB) references D34QP (id) on delete cascade on update cascade,
+	constraint CROMXATM foreign key (Z7CP5) references HGMQ6 (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table FEVH4 (
+	id varchar(24) not null,
+	DZLIM varchar(100) not null,
+	F3YUE varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY QPADP (DZLIM)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table NOXN3 (
+	id varchar(24) not null,
+	BRQP2 varchar(24) not null,
+	FFTBJ varchar(24) not null,
+	A7XO2 varchar(24),
+	KBO7R double not null,
+	ECDKM double,
+	NUMK2 int not null,
+	LETOE int not null,
+	YKSSU varchar(1000),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	KEY A7XO2 (A7XO2),
+	KEY BRQP2 (BRQP2),
+	KEY FFTBJ (FFTBJ),
+	constraint YHuJBJOA foreign key (BRQP2) references E2I7U (id) on delete cascade on update cascade,
+	constraint MZZLFWKV foreign key (FFTBJ) references E2I7U (id) on delete cascade on update cascade,
+	constraint OOIIJMRS foreign key (A7XO2) references FEVH4 (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table FLQLP (
+	id varchar(24) not null,
+	FZ2R5 varchar(24) not null,
+	LUEVY varchar(24) not null,
+	M22QN varchar(24) not null,
+	OVE3E varchar(24) not null,
+	NRURT varchar(24),
+	OCA7E varchar(24),
+	XMM6Q varchar(24),
+	V5DPX varchar(100) not null,
+	S3Q3Y double not null,
+	ZRV3B varchar(100) not null,
+	FHCYT text,
+	PRIMARY KEY (id),
+	KEY M22QN (M22QN),
+	KEY XMM6Q (XMM6Q),
+	KEY OCA7E (OCA7E),
+	KEY OVE3E (OVE3E),
+	KEY FZ2R5 (FZ2R5),
+	KEY LUEVY (LUEVY),
+	KEY NRURT (NRURT),
+	constraint RSSVKRQV foreign key (OVE3E) references SFEGG (id) on delete cascade on update cascade,
+	constraint EXBYRKVB foreign key (XMM6Q) references HU5A5 (id) on delete cascade on update cascade,
+	constraint HCEKFTJK foreign key (M22QN) references TPXBU (id) on delete cascade on update cascade,
+	constraint KWNRRXuP foreign key (NRURT) references OUBDL (id) on delete cascade on update cascade,
+	constraint RQuDOGQu foreign key (OCA7E) references EPZU6 (id) on delete cascade on update cascade,
+	constraint uIRDRBRV foreign key (FZ2R5) references JDLNA (id) on delete cascade on update cascade,
+	constraint MSMuETPN foreign key (LUEVY) references E2I7U (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table AMYXQ (
+	id varchar(24) not null,
+	GXLUB varchar(24) not null,
+	LUEVY varchar(24) not null,
+	XQDYT varchar(24) not null,
+	AMYXQ double not null,
+	OZTQF double not null,
+	Z35GY double not null,
+	KKGN5 varchar(24),
+	PRIMARY KEY (id),
+	KEY GXLUB (GXLUB),
+	KEY XQDYT (XQDYT),
+	KEY LUEVY (LUEVY),
+	UNIQUE KEY VN3QP (GXLUB, LUEVY),
+	KEY KKGN5 (KKGN5),
+	constraint AVDTHRGA foreign key (XQDYT) references XGSJM (id) on delete cascade on update cascade,
+	constraint TTJXJHYD foreign key (GXLUB) references THNTS (id) on delete cascade on update cascade,
+	constraint uVMOASBI foreign key (KKGN5) references SISUT (id) on delete cascade on update cascade,
+	constraint RYPGYAZH foreign key (LUEVY) references E2I7U (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table ZTFET (
+	id varchar(24) not null,
+	CYZU6 varchar(200) not null,
+	AERTL varchar(200) not null,
+	PMM7A tinyint not null,
+	SIJCN varchar(200) not null,
+	RTLWN varchar(200) not null,
+	ZMABC varchar(200) not null,
+	W3GHO text not null,
+	U7IJ3 text,
+	PRIMARY KEY (id),
+	UNIQUE KEY CIMX7 (CYZU6, AERTL),
+	KEY BRPXE (CYZU6),
+	KEY SSO2T (AERTL)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table WRZVO (
+	id varchar(24) not null,
+	TVNW2 varchar(100),
+	ZHITY varchar(100),
+	SYPKF varchar(100),
+	IDUT2 varchar(200),
+	O6QJ3 varchar(1000),
+	NO2JA varchar(1000),
+	YKSSU text,
+	FHCYT text,
+	QZ6VT varchar(1000),
+	PRIMARY KEY (id),
+	KEY QKJKS (SYPKF),
+	KEY GAG3S (TVNW2),
+	KEY JH666 (ZHITY)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table WGSDC (
+	id varchar(24) not null,
+	NOHHR varchar(100) not null,
+	AVPYF varchar(100) not null,
+	SYPKF varchar(100) not null,
+	IDUT2 varchar(200) not null,
+	FZXV5 varchar(100),
+	DQYGV varchar(100),
+	SWCQV int not null,
+	YKSSU varchar(1000),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	KEY X6K5N (IDUT2),
+	KEY M5B5R (SYPKF),
+	KEY XW5IP (NOHHR),
+	KEY F7H3Y (AVPYF),
+	KEY T65YI (FZXV5),
+	KEY XRKQ4 (DQYGV)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table HDDVB (
+	id varchar(24) not null,
+	FV24E varchar(24) not null,
+	UJ6XY varchar(24) not null,
+	M22QN varchar(24) not null,
+	NZ4MQ varchar(24) not null,
+	ETPQV varchar(24),
+	PRUV2 varchar(24),
+	YKSSU varchar(1000),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	KEY M22QN (M22QN),
+	KEY PRUV2 (PRUV2),
+	KEY NZ4MQ (NZ4MQ),
+	KEY FV24E (FV24E),
+	KEY UJ6XY (UJ6XY),
+	KEY ETPQV (ETPQV),
+	constraint XDHAOISE foreign key (NZ4MQ) references YYBCX (id) on delete cascade on update cascade,
+	constraint CYXIDCXY foreign key (FV24E) references E2I7U (id) on delete cascade on update cascade,
+	constraint ZKROQGGX foreign key (ETPQV) references WRZVO (id) on delete cascade on update cascade,
+	constraint NTEDELZZ foreign key (PRUV2) references WGSDC (id) on delete cascade on update cascade,
+	constraint QCVKLYAS foreign key (UJ6XY) references E2I7U (id) on delete cascade on update cascade,
+	constraint LOQSITZQ foreign key (M22QN) references TPXBU (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table PG27A (
+	id varchar(24) not null,
+	DZLIM varchar(100) not null,
+	F3YUE varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY S4YPB (DZLIM)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table NPCYY (
+	id varchar(24) not null,
+	CH3FR varchar(24) not null,
+	XVSBH varchar(24),
+	B5OUF int,
+	PRIMARY KEY (id),
+	KEY CH3FR (CH3FR),
+	KEY XVSBH (XVSBH),
+	UNIQUE KEY S2DGA (CH3FR, XVSBH),
+	constraint LKKuNSTQ foreign key (CH3FR) references XOAOP (id) on delete cascade on update cascade,
+	constraint ZDHFJuOJ foreign key (XVSBH) references PG27A (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table SR2I6 (
+	id varchar(24) not null,
+	A7XO2 varchar(24) not null,
+	SSWZH varchar(24) not null,
+	PRIMARY KEY (id),
+	KEY SSWZH (SSWZH),
+	KEY A7XO2 (A7XO2),
+	UNIQUE KEY ZKOHZ (A7XO2, SSWZH),
+	constraint LXOBZQWX foreign key (A7XO2) references FEVH4 (id) on delete cascade on update cascade,
+	constraint PDDMDJJW foreign key (SSWZH) references T52LX (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table TTGWX (
+	id varchar(24) not null,
+	LUEVY varchar(24) not null,
+	CBVKT varchar(100) not null,
+	PRIMARY KEY (id),
+	KEY F7YYM (LUEVY),
+	UNIQUE KEY GKL7R (CBVKT),
+	constraint GWWPGJWX foreign key (LUEVY) references E2I7U (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table TDRVG (
+	id varchar(24) not null,
+	FGG57 varchar(100) not null,
+	SSHPJ varchar(100) not null,
+	SFJ6L varchar(100) not null,
+	ZH72S varchar(100) not null,
+	PRIMARY KEY (id),
+	KEY P62K5 (SSHPJ),
+	KEY XEGEF (SFJ6L),
+	KEY WJM3Z (ZH72S),
+	UNIQUE KEY TK2R2 (FGG57)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table ZYGMF (
+	id varchar(24) not null,
+	DZLIM varchar(100) not null,
+	F3YUE varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY JVSQT (DZLIM)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table FG26Y (
+	id varchar(24) not null,
+	T4IBQ varchar(100),
+	ner varchar(100),
+	ber varchar(100),
+	hr varchar(100),
+	mmr varchar(100),
+	QZ6VT varchar(1000),
+	PRIMARY KEY (id),
+	KEY SPAIF (T4IBQ)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table SZQWJ (
+	id varchar(24) not null,
+	GXLUB varchar(24) not null,
+	CH3FR varchar(24) not null,
+	D237E int not null,
+	JOGI6 varchar(24),
+	PRIMARY KEY (id),
+	KEY GXLUB (GXLUB),
+	KEY CH3FR (CH3FR),
+	UNIQUE KEY ZRLKW (GXLUB, CH3FR),
+	KEY JOGI6 (JOGI6),
+	constraint TJNEMQOD foreign key (GXLUB) references THNTS (id) on delete cascade on update cascade,
+	constraint HWEBZOML foreign key (CH3FR) references XOAOP (id) on delete cascade on update cascade,
+	constraint XVMMFQXM foreign key (JOGI6) references FG26Y (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table QYWQD (
+	id varchar(24) not null,
+	WNUNU varchar(24) not null,
+	HHVLX varchar(24) not null,
+	HVHRZ double not null,
+	YKSSU varchar(1000),
+	FHCYT varchar(1000),
+	PRIMARY KEY (id),
+	KEY HHVLX (HHVLX),
+	KEY WNUNU (WNUNU),
+	constraint DSGZOCYH foreign key (HHVLX) references NOXN3 (id) on delete cascade on update cascade,
+	constraint ZWNuDBuB foreign key (WNUNU) references NOXN3 (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table I66GN (
+	id varchar(24) not null,
+	FZ2R5 varchar(24),
+	GJBJC varchar(24),
+	PRIMARY KEY (id),
+	KEY FZ2R5 (FZ2R5),
+	UNIQUE KEY TBOZS (FZ2R5, GJBJC),
+	KEY GJBJC (GJBJC),
+	constraint RHXJuQZJ foreign key (FZ2R5) references JDLNA (id) on delete cascade on update cascade,
+	constraint OOTILHEG foreign key (GJBJC) references ZYGMF (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table BACOW (
+	id varchar(24) not null,
+	WZP3R varchar(100) not null,
+	FZ2R5 varchar(24) not null,
+	PRIMARY KEY (id),
+	KEY FZ2R5 (FZ2R5),
+	UNIQUE KEY CYVZQ (WZP3R),
+	constraint NDCWQFVN foreign key (FZ2R5) references JDLNA (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table moa (
+	id varchar(24) not null,
+	DZLIM varchar(100) not null,
+	F3YUE varchar(1000),
+	PRIMARY KEY (id),
+	UNIQUE KEY TTHMB (DZLIM)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table TA5EB (
+	id varchar(24) not null,
+	V34C7 varchar(24) not null,
+	GJBJC varchar(24) not null,
+	PRIMARY KEY (id),
+	KEY V34C7 (V34C7),
+	KEY GJBJC (GJBJC),
+	UNIQUE KEY B3QPZ (V34C7, GJBJC),
+	constraint HBCXAVLB foreign key (GJBJC) references ZYGMF (id) on delete cascade on update cascade,
+	constraint ZLSVFLDM foreign key (V34C7) references moa (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table NMYH3 (
+	id varchar(24) not null,
+	FTQLQ varchar(100),
+	RCRDD varchar(100),
+	FWWIQ varchar(100),
+	O3QXW varchar(100),
+	FHCYT text,
+	PRIMARY KEY (id),
+	KEY DQQLF (FTQLQ)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table FEIOE (
+	id varchar(24) not null,
+	LUEVY varchar(24) not null,
+	GMSGA varchar(24) not null,
+	FVGD2 int not null,
+	YP2CR int not null,
+	TQ7W3 int not null,
+	PRIMARY KEY (id),
+	KEY LUEVY (LUEVY),
+	KEY GMSGA (GMSGA),
+	UNIQUE KEY A7XUS (LUEVY, GMSGA),
+	constraint ILKPBIJV foreign key (GMSGA) references NPCYY (id) on delete cascade on update cascade,
+	constraint GDBYYSTF foreign key (LUEVY) references E2I7U (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+create table FBPKL (
+	id varchar(24) not null,
+	V34C7 varchar(24) not null,
+	CH3FR varchar(24) not null,
+	PRIMARY KEY (id),
+	KEY V34C7 (V34C7),
+	KEY CH3FR (CH3FR),
+	UNIQUE KEY ANGG7 (V34C7, CH3FR),
+	constraint AJZVSJXW foreign key (CH3FR) references XOAOP (id) on delete cascade on update cascade,
+	constraint ZFEIKGRF foreign key (V34C7) references moa (id) on delete cascade on update cascade
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_bin;
+----
+
+exec
+analyze table wgsdc update histogram on (id) using data '{"row_count": 68, "qualifier": {"database": "mydb", "table": "wgsdc", "index": "PRIMARY"}}';
+---
+
+exec
+analyze table wgsdc update histogram on (AVPYF) using data '{"row_count": 68, "qualifier": {"database": "mydb", "table": "wgsdc", "index": "F7H3Y"}}';
+---
+
+exec
+analyze table wgsdc update histogram on (SYPKF) using data '{"row_count": 68, "qualifier": {"database": "mydb", "table": "wgsdc", "index": "M5B5R"}}';
+---
+
+exec
+analyze table wgsdc update histogram on (FZXV5) using data '{"row_count": 68, "qualifier": {"database": "mydb", "table": "wgsdc", "index": "T65YI"}}';
+---
+
+exec
+analyze table wgsdc update histogram on (IDUT2) using data '{"row_count": 68, "qualifier": {"database": "mydb", "table": "wgsdc", "index": "X6K5N"}}';
+---
+
+exec
+analyze table wgsdc update histogram on (DQYGV) using data '{"row_count": 68, "qualifier": {"database": "mydb", "table": "wgsdc", "index": "XRKQ4"}}';
+---
+
+exec
+analyze table wgsdc update histogram on (NOHHR) using data '{"row_count": 68, "qualifier": {"database": "mydb", "table": "wgsdc", "index": "XW5IP"}}';
+---
+
+exec
+analyze table hddvb update histogram on (id) using data '{"row_count": 1112, "qualifier": {"database": "mydb", "table": "hddvb", "index": "PRIMARY"}}';
+---
+
+exec
+analyze table hddvb update histogram on (ETPQV) using data '{"row_count": 1112, "qualifier": {"database": "mydb", "table": "hddvb", "index": "ETPQV"}}';
+---
+
+exec
+analyze table hddvb update histogram on (FV24E) using data '{"row_count": 1112, "qualifier": {"database": "mydb", "table": "hddvb", "index": "FV24E"}}';
+---
+
+exec
+analyze table hddvb update histogram on (M22QN) using data '{"row_count": 1112, "qualifier": {"database": "mydb", "table": "hddvb", "index": "M22QN"}}';
+---
+
+exec
+analyze table hddvb update histogram on (NZ4MQ) using data '{"row_count": 1112, "qualifier": {"database": "mydb", "table": "hddvb", "index": "NZ4MQ"}}';
+---
+
+exec
+analyze table hddvb update histogram on (PRUV2) using data '{"row_count": 1112, "qualifier": {"database": "mydb", "table": "hddvb", "index": "PRUV2"}}';
+---
+
+exec
+analyze table hddvb update histogram on (UJ6XY) using data '{"row_count": 1112, "qualifier": {"database": "mydb", "table": "hddvb", "index": "UJ6XY"}}';
+---
+
+exec
+analyze table epzu6 update histogram on (id) using data '{"row_count": 213, "qualifier": {"database": "mydb", "table": "epzu6", "index": "PRIMARY"}}';
+---
+
+exec
+analyze table epzu6 update histogram on (btxc5) using data '{"row_count": 213, "qualifier": {"database": "mydb", "table": "epzu6", "index": "EUOFY"}}';
+---
+
+exec
+analyze table epzu6 update histogram on (sjyn2) using data '{"row_count": 213, "qualifier": {"database": "mydb", "table": "epzu6", "index": "LJD63"}}';
+---
+
+exec
+analyze table epzu6 update histogram on (fvucx) using data '{"row_count": 213, "qualifier": {"database": "mydb", "table": "epzu6", "index": "LP75T"}}';
+---
+
+exec
+analyze table epzu6 update histogram on (tofpn) using data '{"row_count": 213, "qualifier": {"database": "mydb", "table": "epzu6", "index": "SZ5IY"}}';
+---
+
+exec
+analyze table flqlp update histogram on (id) using data '{"row_count": 14781, "qualifier": {"database": "mydb", "table": "flqlp", "index": "PRIMARY"}}';
+---
+
+exec
+analyze table flqlp update histogram on (fz2r5) using data '{"row_count": 14781, "qualifier": {"database": "mydb", "table": "flqlp", "index": "FZ2R5"}}';
+---
+
+exec
+analyze table flqlp update histogram on (luevy) using data '{"row_count": 14781, "qualifier": {"database": "mydb", "table": "flqlp", "index": "LUEVY"}}';
+---
+
+exec
+analyze table flqlp update histogram on (m22qn) using data '{"row_count": 14781, "qualifier": {"database": "mydb", "table": "flqlp", "index": "M22QN"}}';
+---
+
+exec
+analyze table flqlp update histogram on (nrurt) using data '{"row_count": 14781, "qualifier": {"database": "mydb", "table": "flqlp", "index": "NRURT"}}';
+---
+
+exec
+analyze table flqlp update histogram on (oca7e) using data '{"row_count": 14781, "qualifier": {"database": "mydb", "table": "flqlp", "index": "OCA7E"}}';
+---
+
+exec
+analyze table flqlp update histogram on (ove3e) using data '{"row_count": 14781, "qualifier": {"database": "mydb", "table": "flqlp", "index": "OVE3E"}}';
+---
+
+exec
+analyze table flqlp update histogram on (xmm6q) using data '{"row_count": 14781, "qualifier": {"database": "mydb", "table": "flqlp", "index": "XMM6Q"}}';
+---
+
+exec
+analyze table hu5a5 update histogram on (id) using data '{"row_count": 34, "qualifier": {"database": "mydb", "table": "hu5a5", "index": "PRIMARY"}}';
+---
+
+exec
+analyze table hu5a5 update histogram on (tofpn) using data '{"row_count": 34, "qualifier": {"database": "mydb", "table": "hu5a5", "index": "UYQR2"}}';
+---
+
+exec
+analyze table hu5a5 update histogram on (i3vta) using data '{"row_count": 34, "qualifier": {"database": "mydb", "table": "hu5a5", "index": "Z2WXS"}}';
+---
+
+exec
+analyze table e2i7u update histogram on (id) using data '{"row_count": 3842, "qualifier": {"database": "mydb", "table": "e2i7u", "index": "PRIMARY"}}';
+---
+
+exec
+analyze table e2i7u update histogram on (dkcaj) using data '{"row_count": 3842, "qualifier": {"database": "mydb", "table": "e2i7u", "index": "DKCAJ"}}';
+---
+
+exec
+analyze table e2i7u update histogram on (hpcms) using data '{"row_count": 3842, "qualifier": {"database": "mydb", "table": "e2i7u", "index": "HPCMS"}}';
+---
+
+exec
+analyze table e2i7u update histogram on (kng7t) using data '{"row_count": 3842, "qualifier": {"database": "mydb", "table": "e2i7u", "index": "KNG7T"}}';
+---
+
+exec
+analyze table e2i7u update histogram on (tw55n) using data '{"row_count": 3842, "qualifier": {"database": "mydb", "table": "e2i7u", "index": "SFMWS"}}';
+---
+
+exec
+analyze table e2i7u update histogram on (fgg57) using data '{"row_count": 3842, "qualifier": {"database": "mydb", "table": "e2i7u", "index": "TKKOQ"}}';
+---
+
+exec
+analyze table e2i7u update histogram on (zh72s) using data '{"row_count": 3842, "qualifier": {"database": "mydb", "table": "e2i7u", "index": "URBSA"}}';
+---
+
+exec
+analyze table e2i7u update histogram on (xqdyt) using data '{"row_count": 3842, "qualifier": {"database": "mydb", "table": "e2i7u", "index": "XQDYT"}}';
+---
+
+exec
+analyze table szw6v update histogram on (id) using data '{"row_count": 1, "qualifier": {"database": "mydb", "table": "szw6v", "index": "PRIMARY"}}';
+---
+
+exec
+analyze table szw6v update histogram on (h4dmt) using data '{"row_count": 1, "qualifier": {"database": "mydb", "table": "szw6v", "index": "EMW6Y"}}';
+---
+
+exec
+analyze table szw6v update histogram on (sypkf) using data '{"row_count": 1, "qualifier": {"database": "mydb", "table": "szw6v", "index": "GGI5L"}}';
+---
+
+exec
+analyze table szw6v update histogram on (t4ibq) using data '{"row_count": 1, "qualifier": {"database": "mydb", "table": "szw6v", "index": "SPZMU"}}';
+---
+
+exec
+analyze table szw6v update histogram on (v7ufh) using data '{"row_count": 1, "qualifier": {"database": "mydb", "table": "szw6v", "index": "UTKLA"}}';
+---
+
+exec
+analyze table hgmq6 update histogram on (id) using data '{"row_count": 511969, "qualifier": {"database": "mydb", "table": "hgmq6", "index": "PRIMARY"}}';
+---
+
+exec
+analyze table hgmq6 update histogram on (gxlub) using data '{"row_count": 511969, "qualifier": {"database": "mydb", "table": "hgmq6", "index": "GXLUB"}}';
+---
+
+exec
+analyze table hgmq6 update histogram on (luevy) using data '{"row_count": 511969, "qualifier": {"database": "mydb", "table": "hgmq6", "index": "LUEVY"}}';
+---
+
+exec
+analyze table hgmq6 update histogram on (m22qn) using data '{"row_count": 511969, "qualifier": {"database": "mydb", "table": "hgmq6", "index": "M22QN"}}';
+---
+
+exec
+analyze table hgmq6 update histogram on (qqv4m) using data '{"row_count": 511969, "qualifier": {"database": "mydb", "table": "hgmq6", "index": "QQV4M"}}';
+---
+
+exec
+analyze table hgmq6 update histogram on (teuja) using data '{"row_count": 511969, "qualifier": {"database": "mydb", "table": "hgmq6", "index": "TEUJA"}}';
+---
+
+exec
+analyze table nzkpm update histogram on (fgg57) using data '{"row_count": 18779716, "qualifier": {"database": "mydb", "table": "nzkpm", "index": "FXQHW"}}';
+---
+
+exec
+analyze table nzkpm update histogram on (t4ibq) using data '{"row_count": 18779716, "qualifier": {"database": "mydb", "table": "nzkpm", "index": "UFF3F"}}';
+---
+
+exec
+analyze table TPXBU update histogram on (id) using data '{"row_count": 123867}';
+----
+
+exec
+analyze table yk2gw update histogram on (nb3qs) using data '{"row_count": 2498, "qualifier": {"database": "mydb", "table": "yk2gw", "index": "C7DFM"}}';
+---
+
+exec
+analyze table yk2gw update histogram on (ftqlq) using data '{"row_count": 2498, "qualifier": {"database": "mydb", "table": "yk2gw", "index": "EZCTT"}}';
+---
+
+exec
+analyze table yk2gw update histogram on (paef5) using data '{"row_count": 2498, "qualifier": {"database": "mydb", "table": "yk2gw", "index": "FEGLT"}}';
+---
+
+exec
+analyze table yk2gw update histogram on (eo7iv) using data '{"row_count": 2498, "qualifier": {"database": "mydb", "table": "yk2gw", "index": "NFJNB"}}';
+---
+
+exec
+analyze table yk2gw update histogram on (tuxml) using data '{"row_count": 2498, "qualifier": {"database": "mydb", "table": "yk2gw", "index": "T3X5H"}}';
+---
+
+exec
+analyze table yk2gw update histogram on (lbl53) using data '{"row_count": 2498, "qualifier": {"database": "mydb", "table": "yk2gw", "index": "TU5AX"}}';
+---
+
+exec
+analyze table yk2gw update histogram on (muhjf) using data '{"row_count": 2498, "qualifier": {"database": "mydb", "table": "yk2gw", "index": "TWFWA"}}';
+---
+
+exec
+analyze table jdlna update histogram on (ftqlq) using data '{"row_count": 399, "qualifier": {"database": "mydb", "table": "jdlna", "index": "XDW7Z"}}';
+---
+
+exec
+analyze table jdlna update histogram on (ftqlq) using data '{"row_count": 399, "qualifier": {"database": "mydb", "table": "jdlna", "index": "XDW7Z"}}';
+---
+
+exec
+analyze table tpxbu update histogram on (btxc5) using data '{"row_count": 123867, "qualifier": {"database": "mydb", "table": "tpxbu", "index": "UZ6GK"}}';
+---
+
+exec
+analyze table sisut update histogram on (t4ibq) using data '{"row_count": 103907130, "qualifier": {"database": "mydb", "table": "sisut", "index": "TTQYJ"}}';
+---
+
+exec
+analyze table sisut update histogram on (zh72s) using data '{"row_count": 103907130, "qualifier": {"database": "mydb", "table": "sisut", "index": "Z7LT5"}}';
+---
+
+exec
+analyze table wrzvo update histogram on (tvnw2) using data '{"row_count": 39091, "qualifier": {"database": "mydb", "table": "wrzvo", "index": "GAG3S"}}';
+---
+
+exec
+analyze table wrzvo update histogram on (zhity) using data '{"row_count": 39091, "qualifier": {"database": "mydb", "table": "wrzvo", "index": "JH666"}}';
+---
+
+exec
+analyze table wrzvo update histogram on (sypkf) using data '{"row_count": 39091, "qualifier": {"database": "mydb", "table": "wrzvo", "index": "QKJKS"}}';
+---
+
+exec
+analyze table wrzvo update histogram on (tvnw2) using data '{"row_count": 39091, "qualifier": {"database": "mydb", "table": "wrzvo", "index": "GAG3S"}}';
+---
+
+exec
+analyze table wrzvo update histogram on (zhity) using data '{"row_count": 39091, "qualifier": {"database": "mydb", "table": "wrzvo", "index": "JH666"}}';
+---
+
+exec
+analyze table wrzvo update histogram on (sypkf) using data '{"row_count": 39091, "qualifier": {"database": "mydb", "table": "wrzvo", "index": "QKJKS"}}';
+---
+
+exec
+analyze table oubdl update histogram on (v5dpx) using data '{"row_count": 18395, "qualifier": {"database": "mydb", "table": "oubdl", "index": "CZWS6"}}';
+---
+
+exec
+analyze table oubdl update histogram on (no52d) using data '{"row_count": 18395, "qualifier": {"database": "mydb", "table": "oubdl", "index": "IRMAC"}}';
+---
+
+exec
+analyze table oubdl update histogram on (zh72s) using data '{"row_count": 18395, "qualifier": {"database": "mydb", "table": "oubdl", "index": "JFRPY"}}';
+---
+
+exec
+analyze table oubdl update histogram on (ftqlq) using data '{"row_count": 18395, "qualifier": {"database": "mydb", "table": "oubdl", "index": "SVIT7"}}';
+---
+
+exec
+analyze table sfegg update histogram on (dkcaj) using data '{"row_count": 380, "qualifier": {"database": "mydb", "table": "sfegg", "index": "DKCAJ"}}';
+---
+
+exec
+analyze table sfegg update histogram on (no52d,vyo5e,dkcaj) using data '{"row_count": 380, "qualifier": {"database": "mydb", "table": "sfegg", "index": "DKRQA"}}';
+---
+
+exec
+analyze table sfegg update histogram on (dkcaj) using data '{"row_count": 380, "qualifier": {"database": "mydb", "table": "sfegg", "index": "DKCAJ"}}';
+---
+
+exec
+analyze table sfegg update histogram on (no52d,vyo5e,dkcaj) using data '{"row_count": 380, "qualifier": {"database": "mydb", "table": "sfegg", "index": "DKRQA"}}';
+---
+
+exec
+analyze table THNTS update histogram on (id) using data '{"row_count": 2498}';
+----
+
+exec
+analyze table JMRQL update histogram on (id) using data '{"row_count": 3}';
+----
+
+exec
+analyze table YK2GW update histogram on (id) using data '{"row_count": 2498}';
+----
+
+exec
+analyze table IJLXP update histogram on (id) using data '{"row_count": 5661}';
+----
+
+exec
+analyze table HU5A5 update histogram on (id) using data '{"row_count": 34}';
+----
+
+exec
+analyze table EPZU6 update histogram on (id) using data '{"row_count": 213}';
+----
+
+exec
+analyze table WGSDC update histogram on (id) using data '{"row_count": 68}';
+----
+
+exec
+analyze table SZW6V update histogram on (id) using data '{"row_count": 1}';
+----
+
+exec
+analyze table SFEGG update histogram on (id) using data '{"row_count": 380}';
+----
+
+exec
+analyze table JDLNA update histogram on (id) using data '{"row_count": 399}';
+----
+
+exec
+analyze table I66GN update histogram on (id) using data '{"row_count": 239}';
+----
+
+exec
+analyze table BACOW update histogram on (id) using data '{"row_count": 5148}';
+----
+
+exec
+analyze table FLQLP update histogram on (id) using data '{"row_count": 14781}';
+----
+
+exec
+analyze table S3FQX update histogram on (id) using data '{"row_count": 1}';
+----
+
+exec
+analyze table JJGQT update histogram on (id) using data '{"row_count": 6}';
+----
+
+exec
+analyze table AMYXQ update histogram on (id) using data '{"row_count": 4786678}';
+----
+
+exec
+analyze table XGSJM update histogram on (id) using data '{"row_count": 5}';
+----
+
+exec
+analyze table WE72E update histogram on (id) using data '{"row_count": 3181}';
+----
+
+exec
+analyze table FCBVZ update histogram on (id) using data '{"row_count": 0}';
+----
+
+exec
+analyze table RLOHD update histogram on (id) using data '{"row_count": 226}';
+----
+
+exec
+analyze table T52LX update histogram on (id) using data '{"row_count": 10}';
+----
+
+exec
+analyze table HDDVB update histogram on (id) using data '{"row_count": 1112}';
+----
+
+exec
+analyze table YYBCX update histogram on (id) using data '{"row_count": 12}';
+----
+
+exec
+analyze table FEVH4 update histogram on (id) using data '{"row_count": 56}';
+----
+
+exec
+analyze table SR2I6 update histogram on (id) using data '{"row_count": 71}';
+----
+
+exec
+analyze table NMYH3 update histogram on (id) using data '{"row_count": 415}';
+----
+
+exec
+analyze table IMJ6V update histogram on (id) using data '{"row_count": 6140}';
+----
+
+exec
+analyze table TDRVG update histogram on (id) using data '{"row_count": 47285}';
+----
+
+exec
+analyze table IIISV update histogram on (id) using data '{"row_count": 13}';
+----
+
+exec
+analyze table moa update histogram on (id) using data '{"row_count": 36}';
+----
+
+exec
+analyze table FBPKL update histogram on (id) using data '{"row_count": 60}';
+----
+
+exec
+analyze table TA5EB update histogram on (id) using data '{"row_count": 70}';
+----
+
+exec
+analyze table HGMQ6 update histogram on (id) using data '{"row_count": 511969}';
+----
+
+exec
+analyze table SEQS3 update histogram on (id) using data '{"row_count": 535843}';
+----
+
+exec
+analyze table SZQWJ update histogram on (id) using data '{"row_count": 3936}';
+----
+
+exec
+analyze table E2I7U update histogram on (id) using data '{"row_count": 3842}';
+----
+
+exec
+analyze table ARLV5 update histogram on (id) using data '{"row_count": 291}';
+----
+
+exec
+analyze table FEIOE update histogram on (id) using data '{"row_count": 6367}';
+----
+
+exec
+analyze table TNMXI update histogram on (id) using data '{"row_count": 5}';
+----
+
+exec
+analyze table F35MI update histogram on (id) using data '{"row_count": 5}';
+----
+
+exec
+analyze table XOAOP update histogram on (id) using data '{"row_count": 74}';
+----
+
+exec
+analyze table PG27A update histogram on (id) using data '{"row_count": 11}';
+----
+
+exec
+analyze table NPCYY update histogram on (id) using data '{"row_count": 89}';
+----
+
+exec
+analyze table TTGWX update histogram on (id) using data '{"row_count": 3}';
+----
+
+exec
+analyze table QYWQD update histogram on (id) using data '{"row_count": 70692}';
+----
+
+exec
+analyze table NOXN3 update histogram on (id) using data '{"row_count": 11813}';
+----
+
+exec
+analyze table ZYGMF update histogram on (id) using data '{"row_count": 81}';
+----
+
+exec
+analyze table TPXHZ update histogram on (id) using data '{"row_count": 16}';
+----
+
+exec
+analyze table OUBDL update histogram on (id) using data '{"row_count": 18395}';
+----
+
+exec
+analyze table SISUT update histogram on (id) using data '{"row_count": 103907130}';
+----
+
+exec
+analyze table WRZVO update histogram on (id) using data '{"row_count": 39091}';
+----
+
+exec
+analyze table NZKPM update histogram on (id) using data '{"row_count": 18779716}';
+----
+
+exec
+analyze table FG26Y update histogram on (id) using data '{"row_count": 1001}';
+----
+
+exec
+analyze table D34QP update histogram on (id) using data '{"row_count": 36}';
+----
+
+exec
+analyze table ZTFET update histogram on (id) using data '{"row_count": 64}';
+----
+
+exec
+CREATE TRIGGER SZW6V_on_insert BEFORE INSERT ON SZW6V
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.T4IBQ IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.V7UFH IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.SYPKF IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.H4DMT IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF NEW.SWCQV NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'The SWCQV field is an int boolean (0/1) meaning if record is fully SWCQV.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The SWCQV field is an int boolean (0/1) meaning if fully SWCQV.';
+  END IF;
+  UPDATE S3FQX SET ADWYM = 1;
+END//
+----
+
+exec
+CREATE TRIGGER SZW6V_on_update BEFORE UPDATE ON SZW6V
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.T4IBQ IS NOT NULL AND (NEW.T4IBQ <> OLD.T4IBQ)
+    OR
+    NEW.V7UFH IS NOT NULL AND (NEW.V7UFH <> OLD.V7UFH)
+    OR
+    NEW.SYPKF IS NOT NULL AND (NEW.SYPKF <> OLD.SYPKF)
+  THEN
+    -- SET @custom_error_message = 'The fields identifying what to override can not be changed! Please use the ignore field and create new one if necessary.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The fields identifying what to override can not be changed! Please use the ignore field and create new one if necessary.';
+  END IF;
+  IF
+    NEW.H4DMT IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF NEW.SWCQV NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'The SWCQV field is an int boolean (0/1) meaning if record is fully SWCQV.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The SWCQV field is an int boolean (0/1) meaning if fully SWCQV.';
+  END IF;
+  UPDATE S3FQX SET ADWYM = 1;
+END//
+----
+
+exec
+CREATE TRIGGER SZW6V_on_delete BEFORE DELETE ON SZW6V
+FOR EACH ROW
+BEGIN
+  -- SET @custom_error_message = 'Deletion is forbidden from override and additional tables. Please use the SWCQV field instead.';
+  -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Deletion is forbidden from override and additional tables. Please use the SWCQV field instead.';
+END//
+----
+
+exec
+CREATE TRIGGER WGSDC_on_insert BEFORE INSERT ON WGSDC
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.NOHHR IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.AVPYF IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.SYPKF IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.IDUT2 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.FZXV5 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.DQYGV IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF NEW.SWCQV NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'The SWCQV field is an int boolean (0/1) meaning if record is fully SWCQV.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The SWCQV field is an int boolean (0/1) meaning if fully SWCQV.';
+  END IF;
+  IF NEW.FZXV5 IS NULL AND NEW.DQYGV IS NULL
+  THEN
+    -- SET @custom_error_message = 'Either the mutant or partner overridden field must have value!';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Either the mutant or partner overridden field must have value!';
+  END IF;
+  IF NEW.FZXV5 IS NOT NULL AND NEW.DQYGV IS NOT NULL
+  THEN
+    -- SET @custom_error_message = 'Only one of the mutant or partner overridden field can have value!';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Only one of the mutant or partner overridden field can have value!';
+  END IF;
+  UPDATE S3FQX SET ADWYM = 1;
+END//
+----
+
+exec
+CREATE TRIGGER WGSDC_on_update BEFORE UPDATE ON WGSDC
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.NOHHR IS NOT NULL AND (NEW.NOHHR <> OLD.NOHHR)
+    OR
+    NEW.AVPYF IS NOT NULL AND (NEW.AVPYF <> OLD.AVPYF)
+    OR
+    NEW.SYPKF IS NOT NULL AND (NEW.SYPKF <> OLD.SYPKF)
+    OR
+    NEW.IDUT2 IS NOT NULL AND (NEW.IDUT2 <> OLD.IDUT2)
+  THEN
+    -- SET @custom_error_message = 'The fields identifying what to override can not be changed! Please use the ignore field and create new one if necessary.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The fields identifying what to override can not be changed! Please use the ignore field and create new one if necessary.';
+  END IF;
+  IF
+    NEW.FZXV5 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.DQYGV IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF NEW.SWCQV NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'The SWCQV field is an int boolean (0/1) meaning if record is fully SWCQV.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The SWCQV field is an int boolean (0/1) meaning if fully SWCQV.';
+  END IF;
+  IF NEW.FZXV5 IS NULL AND NEW.DQYGV IS NULL
+  THEN
+    -- SET @custom_error_message = 'Either the mutant or partner overridden field must have value!';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Either the mutant or partner overridden field must have value!';
+  END IF;
+  IF NEW.FZXV5 IS NOT NULL AND NEW.DQYGV IS NOT NULL
+  THEN
+    -- SET @custom_error_message = 'Only one of the mutant or partner overridden field can have value!';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Only one of the mutant or partner overridden field can have value!';
+  END IF;
+  UPDATE S3FQX SET ADWYM = 1;
+END//
+----
+
+exec
+CREATE TRIGGER WGSDC_on_delete BEFORE DELETE ON WGSDC
+FOR EACH ROW
+BEGIN
+  -- SET @custom_error_message = 'Deletion is forbidden from override and additional tables. Please use the SWCQV field instead.';
+  -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Deletion is forbidden from override and additional tables. Please use the SWCQV field instead.';
+END//
+----
+
+exec
+CREATE TRIGGER EPZU6_on_insert BEFORE INSERT ON EPZU6
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.TOFPN IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.SJYN2 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.FVUCX IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.BTXC5 IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF NEW.SWCQV NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'The SWCQV field is an int boolean (0/1) meaning if record is fully SWCQV.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The SWCQV field is an int boolean (0/1) meaning if fully SWCQV.';
+  END IF;
+  UPDATE S3FQX SET ADWYM = 1;
+END//
+----
+
+exec
+CREATE TRIGGER EPZU6_on_update BEFORE UPDATE ON EPZU6
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.TOFPN IS NOT NULL AND (NEW.TOFPN <> OLD.TOFPN)
+    OR
+    NEW.SJYN2 IS NOT NULL AND (NEW.SJYN2 <> OLD.SJYN2)
+    OR
+    NEW.BTXC5 IS NOT NULL AND (NEW.BTXC5 <> OLD.BTXC5)
+  THEN
+    -- SET @custom_error_message = 'The fields identifying what to override can not be changed! Please use the ignore field and create new one if necessary.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The fields identifying what to override can not be changed! Please use the ignore field and create new one if necessary.';
+  END IF;
+  IF
+    NEW.FVUCX IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF NEW.SWCQV NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'The SWCQV field is an int boolean (0/1) meaning if record is fully SWCQV.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The SWCQV field is an int boolean (0/1) meaning if fully SWCQV.';
+  END IF;
+  UPDATE S3FQX SET ADWYM = 1;
+END//
+----
+
+exec
+CREATE TRIGGER EPZU6_on_delete BEFORE DELETE ON EPZU6
+FOR EACH ROW
+BEGIN
+  -- SET @custom_error_message = 'Deletion is forbidden from override and additional tables. Please use the SWCQV field instead.';
+  -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Deletion is forbidden from override and additional tables. Please use the SWCQV field instead.';
+END//
+----
+
+exec
+CREATE TRIGGER HU5A5_on_insert BEFORE INSERT ON HU5A5
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.TOFPN IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.I3VTA IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.SFJ6L IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.V5DPX IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.LJLUM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.IDPK7 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.NO52D IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.ZRV3B IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.VYO5E IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF NEW.SWCQV NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'The SWCQV field is an int boolean (0/1) meaning if record is fully SWCQV.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The SWCQV field is an int boolean (0/1) meaning if fully SWCQV.';
+  END IF;
+  UPDATE S3FQX SET ADWYM = 1;
+END//
+----
+
+exec
+CREATE TRIGGER HU5A5_on_update BEFORE UPDATE ON HU5A5
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.TOFPN IS NOT NULL AND (NEW.TOFPN <> OLD.TOFPN)
+    OR
+    NEW.I3VTA IS NOT NULL AND (NEW.I3VTA <> OLD.I3VTA)
+    OR
+    NEW.V5DPX IS NOT NULL AND (NEW.V5DPX <> OLD.V5DPX)
+    OR
+    NEW.LJLUM IS NOT NULL AND (NEW.LJLUM <> OLD.LJLUM)
+    OR
+    NEW.IDPK7 IS NOT NULL AND (NEW.IDPK7 <> OLD.IDPK7)
+    OR
+    NEW.NO52D IS NOT NULL AND (NEW.NO52D <> OLD.NO52D)
+    OR
+    NEW.ZRV3B IS NOT NULL AND (NEW.ZRV3B <> OLD.ZRV3B)
+    OR
+    NEW.VYO5E IS NOT NULL AND (NEW.VYO5E <> OLD.VYO5E)
+  THEN
+    -- SET @custom_error_message = 'Only the SWCQV, SFJ6L, YKSSU and user RNVLS field can be changed of additionals. Please use that field and add a new one if necessary.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Only the SWCQV and non functional fields can be changed of additionals.';
+  END IF;
+  IF
+    NEW.SFJ6L IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF NEW.SWCQV NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'The SWCQV field is an int boolean (0/1) meaning if record is fully SWCQV.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The SWCQV field is an int boolean (0/1) meaning if fully SWCQV.';
+  END IF;
+  UPDATE S3FQX SET ADWYM = 1;
+END//
+----
+
+exec
+CREATE TRIGGER HU5A5_on_delete BEFORE DELETE ON HU5A5
+FOR EACH ROW
+BEGIN
+  -- SET @custom_error_message = 'Deletion is forbidden from override and additional tables. Please use the SWCQV field instead.';
+  -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Deletion is forbidden from override and additional tables. Please use the SWCQV field instead.';
+END//
+----
+
+exec
+CREATE TRIGGER WE72E_on_insert BEFORE INSERT ON WE72E
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.QZ7E7 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.SSHPJ IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER WE72E_on_update BEFORE UPDATE ON WE72E
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.QZ7E7 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.SSHPJ IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER WE72E_on_delete BEFORE DELETE ON WE72E
+FOR EACH ROW
+BEGIN
+    -- SET @custom_error_message = 'A WE72E can not be deleted now. If it is a use-case please contact platform team.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'A WE72E can not be deleted now. If it is a use-case please contact platform team.';
+END//
+----
+
+exec
+CREATE TRIGGER F35MI_on_insert BEFORE INSERT ON F35MI
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER F35MI_on_update BEFORE UPDATE ON F35MI
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER F35MI_on_delete BEFORE DELETE ON F35MI
+FOR EACH ROW
+BEGIN
+    -- SET @custom_error_message = 'A F35MI can not be deleted now. If it is a use-case please contact platform team.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'A F35MI can not be deleted now. If it is a use-case please contact platform team.';
+END//
+----
+
+exec
+CREATE TRIGGER TNMXI_on_insert BEFORE INSERT ON TNMXI
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER TNMXI_on_update BEFORE UPDATE ON TNMXI
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER TNMXI_on_delete BEFORE DELETE ON TNMXI
+FOR EACH ROW
+BEGIN
+    -- SET @custom_error_message = 'A TNMXI can not be deleted now. If it is a use-case please contact platform team.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'A TNMXI can not be deleted now. If it is a use-case please contact platform team.';
+END//
+----
+
+exec
+CREATE TRIGGER XGSJM_on_insert BEFORE INSERT ON XGSJM
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER XGSJM_on_update BEFORE UPDATE ON XGSJM
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER XGSJM_on_delete BEFORE DELETE ON XGSJM
+FOR EACH ROW
+BEGIN
+    -- SET @custom_error_message = 'A XGSJM can not be deleted now. If it is a use-case please contact platform team.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'A XGSJM can not be deleted now. If it is a use-case please contact platform team.';
+END//
+----
+
+exec
+CREATE TRIGGER IIISV_on_insert BEFORE INSERT ON IIISV
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER IIISV_on_update BEFORE UPDATE ON IIISV
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER TTGWX_on_insert BEFORE INSERT ON TTGWX
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.CBVKT IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER TTGWX_on_update BEFORE UPDATE ON TTGWX
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.CBVKT IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER FEVH4_on_insert BEFORE INSERT ON FEVH4
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER FEVH4_on_update BEFORE UPDATE ON FEVH4
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER FEVH4_on_delete BEFORE DELETE ON FEVH4
+FOR EACH ROW
+BEGIN
+    -- SET @custom_error_message = 'An FEVH4 can not be deleted now. If it is a use-case please contact platform team.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'An FEVH4 can not be deleted now. If it is a use-case please contact platform team.';
+END//
+----
+
+exec
+CREATE TRIGGER T52LX_on_insert BEFORE INSERT ON T52LX
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER T52LX_on_update BEFORE UPDATE ON T52LX
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER NOXN3_on_insert BEFORE INSERT ON NOXN3
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.NUMK2 = 1 AND NEW.ECDKM IS NOT NULL
+  THEN
+    -- SET @custom_error_message = 'If the edge TAFAX is activity (1), ECDKM must be NULL.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'If the edge TAFAX is activity (1), ECDKM must be NULL.';
+  END IF;
+  IF
+    NEW.NUMK2 <> 1 AND NEW.ECDKM IS NULL
+  THEN
+    -- SET @custom_error_message = 'If the edge TAFAX is not activity (1), ECDKM must have value.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'If the edge TAFAX is not activity (1), ECDKM must have value.';
+  END IF;
+  UPDATE S3FQX SET ADWYM = 1;
+END//
+----
+
+exec
+CREATE TRIGGER NOXN3_on_update BEFORE UPDATE ON NOXN3
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.NUMK2 = 1 AND NEW.ECDKM IS NOT NULL
+  THEN
+    -- SET @custom_error_message = 'If the edge TAFAX is activity (1), ECDKM must be NULL.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'If the edge TAFAX is activity (1), ECDKM must be NULL.';
+  END IF;
+  IF
+    NEW.NUMK2 <> 1 AND NEW.ECDKM IS NULL
+  THEN
+    -- SET @custom_error_message = 'If the edge TAFAX is not activity (1), ECDKM must have value.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'If the edge TAFAX is not activity (1), ECDKM must have value.';
+  END IF;
+  IF
+    NEW.BRQP2 IS NOT NULL AND (NEW.BRQP2 <> OLD.BRQP2)
+    OR
+    NEW.FFTBJ IS NOT NULL AND (NEW.FFTBJ <> OLD.FFTBJ)
+    OR
+    (NEW.NUMK2 IS NOT NULL) AND (NEW.NUMK2 <> OLD.NUMK2) AND (NEW.NUMK2 = 1 OR OLD.NUMK2 = 1)
+  THEN
+    UPDATE S3FQX SET ADWYM = 1;
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER QYWQD_on_insert BEFORE INSERT ON QYWQD
+FOR EACH ROW
+BEGIN
+  IF
+    (SELECT FFTBJ FROM NOXN3 WHERE id = NEW.WNUNU) <> (SELECT BRQP2 FROM NOXN3 WHERE id = NEW.HHVLX)
+  THEN
+    -- SET @custom_error_message = 'The target UWBAI of the upstream edge must be the same as the source UWBAI of the downstream edge (the enzyme UWBAI).';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The target UWBAI of the upstream edge must be the same as the source UWBAI of the downstream edge (the enzyme UWBAI).';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER QYWQD_on_update BEFORE UPDATE ON QYWQD
+FOR EACH ROW
+BEGIN
+  IF
+    (SELECT FFTBJ FROM NOXN3 WHERE id = NEW.WNUNU) <> (SELECT BRQP2 FROM NOXN3 WHERE id = NEW.HHVLX)
+  THEN
+    -- SET @custom_error_message = 'The target UWBAI of the upstream edge must be the same as the source UWBAI of the downstream edge (the enzyme UWBAI).';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The target UWBAI of the upstream edge must be the same as the source UWBAI of the downstream edge (the enzyme UWBAI).';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER RLOHD_on_insert BEFORE INSERT ON RLOHD
+FOR EACH ROW
+BEGIN
+  IF
+    (SELECT DKCAJ FROM E2I7U WHERE id = NEW.LUEVY) NOT IN (SELECT id FROM F35MI WHERE DZLIM = 'extra_cellular' OR DZLIM = 'OROPK')
+  THEN
+    -- SET @custom_error_message = 'The choosen UWBAI is not TAFAX of extra_cellular or OROPK. Input layer is only defined for these.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The choosen UWBAI is not TAFAX of extra_cellular or OROPK. Input layer is only defined for these.';
+  END IF;
+  IF
+    NEW.KLMAU IS NULL AND NEW.ecm IS NULL
+  THEN
+    -- SET @custom_error_message = 'Either KLMAU or ecm must be set.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Either KLMAU or ecm must be set.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER RLOHD_on_update BEFORE UPDATE ON RLOHD
+FOR EACH ROW
+BEGIN
+  IF
+    (SELECT DKCAJ FROM E2I7U WHERE id = NEW.LUEVY) NOT IN (SELECT id FROM F35MI WHERE DZLIM = 'extra_cellular' OR DZLIM = 'OROPK')
+  THEN
+    -- SET @custom_error_message = 'The choosen UWBAI is not TAFAX of extra_cellular or OROPK. Input layer is only defined for these.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The choosen UWBAI is not TAFAX of extra_cellular or OROPK. Input layer is only defined for these.';
+  END IF;
+  IF
+    NEW.KLMAU IS NULL AND NEW.ecm IS NULL
+  THEN
+    -- SET @custom_error_message = 'Either KLMAU or ecm must be set.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Either KLMAU or ecm must be set.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER YK2GW_on_insert BEFORE INSERT ON YK2GW
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.FTQLQ IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.TUXML IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.PAEF5 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.RUCY4 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.TPNJ6 IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  UPDATE S3FQX SET ADWYM = 1, FPUYA = 1;
+END//
+----
+
+exec
+CREATE TRIGGER YK2GW_on_update BEFORE UPDATE ON YK2GW
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.FTQLQ IS NOT NULL AND (NEW.FTQLQ <> OLD.FTQLQ)
+  THEN
+    -- SET @custom_error_message = 'The FTQLQ of a cell line can not be modified. Delete and re-add if necessary.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The FTQLQ of a cell line can not be modified. Delete and re-add if necessary.';
+  END IF;
+  IF
+    NEW.FTQLQ IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.TUXML IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.PAEF5 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.RUCY4 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.TPNJ6 IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER IJLXP_on_insert BEFORE INSERT ON IJLXP
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.WZP3R IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER IJLXP_on_update BEFORE UPDATE ON IJLXP
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.WZP3R IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER JMRQL_on_insert BEFORE INSERT ON JMRQL
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER JMRQL_on_update BEFORE UPDATE ON JMRQL
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER JMRQL_on_delete BEFORE DELETE ON JMRQL
+FOR EACH ROW
+BEGIN
+    -- SET @custom_error_message = 'A JMRQL can not be deleted now. If it is a use-case please contact platform team.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'A JMRQL can not be deleted now. If it is a use-case please contact platform team.';
+END//
+----
+
+exec
+CREATE TRIGGER AMYXQ_on_insert BEFORE INSERT ON AMYXQ
+FOR EACH ROW
+BEGIN
+  IF
+    (SELECT FGG57 FROM E2I7U WHERE id = NEW.LUEVY) IS NULL
+  THEN
+    -- SET @custom_error_message = 'The given UWBAI can not be connected to a AMYXQ record as it does not have IYDZV.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The given UWBAI can not be connected to a AMYXQ record as it does not have IYDZV.';
+  END IF;
+  IF
+    NEW.AMYXQ < 0 OR NEW.OZTQF < 0 OR NEW.Z35GY < 0
+  THEN
+    -- SET @custom_error_message = 'All values in AMYXQ must ne non-negative.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'All values in AMYXQ must ne non-negative.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER AMYXQ_on_update BEFORE UPDATE ON AMYXQ
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.GXLUB IS NOT NULL AND (NEW.GXLUB <> OLD.GXLUB)
+    OR
+    NEW.LUEVY IS NOT NULL AND (NEW.LUEVY <> OLD.LUEVY)
+    OR
+    NEW.KKGN5 IS NOT NULL AND (NEW.KKGN5 <> OLD.KKGN5)
+  THEN
+    -- SET @custom_error_message = 'For a built-in table, fields identifying where to apply and from where it originates can not be changed!';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'For a built-in table, fields identifying where to apply and from where it originates can not be changed!';
+  END IF;
+  IF
+    NEW.AMYXQ < 0 OR NEW.OZTQF < 0 OR NEW.Z35GY < 0
+  THEN
+    -- SET @custom_error_message = 'All values in AMYXQ must ne non-negative.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'All values in AMYXQ must ne non-negative.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER D34QP_on_insert BEFORE INSERT ON D34QP
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.TWMSR IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.QHMGE IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.MLNPU IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.FI3GA IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.ZNP4P IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER D34QP_on_update BEFORE UPDATE ON D34QP
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.TWMSR IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.QHMGE IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.MLNPU IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.FI3GA IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.ZNP4P IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER HGMQ6_on_insert BEFORE INSERT ON HGMQ6
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.TJPT7 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.ARN5P IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.XOSD4 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.IDE43 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.HMW4H IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF
+    NEW.FSDY2 NOT IN ('benign', 'VUS', 'SRARY', 'UBQWG')
+  THEN
+    -- SET @custom_error_message = 'FSDY2 must be either ''benign'', ''VUS'', ''SRARY'' or ''UBQWG''.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'FSDY2 must be either ''benign'', ''VUS'', ''SRARY'' or ''UBQWG''.';
+  END IF;
+  IF NEW.LT7K6 IS NOT NULL AND NEW.SPPYD IS NOT NULL
+  THEN
+    -- SET @custom_error_message = 'If LT7K6 has value, SPPYD must be NULL.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'If LT7K6 has value, SPPYD must be NULL.';
+  END IF;
+  IF NEW.LT7K6 IS NULL AND (NEW.SPPYD IS NULL OR NEW.SPPYD <> 0.5)
+  THEN
+    -- SET @custom_error_message = 'If LT7K6 does not have value, SPPYD must be 0.5.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'If LT7K6 does not have value, SPPYD must be 0.5.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER HGMQ6_on_update BEFORE UPDATE ON HGMQ6
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.GXLUB IS NOT NULL AND (NEW.GXLUB <> OLD.GXLUB)
+    OR
+    NEW.LUEVY IS NOT NULL AND (NEW.LUEVY <> OLD.LUEVY)
+    OR
+    NEW.M22QN IS NOT NULL AND (NEW.M22QN <> OLD.M22QN)
+    OR
+    NEW.TEUJA IS NOT NULL AND (NEW.TEUJA <> OLD.TEUJA)
+    OR
+    NEW.QQV4M IS NOT NULL AND (NEW.QQV4M <> OLD.QQV4M)
+  THEN
+    -- SET @custom_error_message = 'For a built-in table, fields identifying where to apply and from where it originates can not be changed!';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'For a built-in table, fields identifying where to apply and from where it originates can not be changed!';
+  END IF;
+  IF
+    NEW.TJPT7 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.ARN5P IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.XOSD4 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.IDE43 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.HMW4H IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF
+    NEW.FSDY2 NOT IN ('benign', 'VUS', 'SRARY', 'UBQWG')
+  THEN
+    -- SET @custom_error_message = 'FSDY2 must be either ''benign'', ''VUS'', ''SRARY'' or ''UBQWG''.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'FSDY2 must be either ''benign'', ''VUS'', ''SRARY'' or ''UBQWG''.';
+  END IF;
+  IF NEW.LT7K6 IS NOT NULL AND NEW.SPPYD IS NOT NULL
+  THEN
+    -- SET @custom_error_message = 'If LT7K6 has value, SPPYD must be NULL.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'If LT7K6 has value, SPPYD must be NULL.';
+  END IF;
+  IF NEW.LT7K6 IS NULL AND (NEW.SPPYD IS NULL OR NEW.SPPYD <> 0.5)
+  THEN
+    -- SET @custom_error_message = 'If LT7K6 does not have value, SPPYD must be 0.5.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'If LT7K6 does not have value, SPPYD must be 0.5.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER TPXBU_on_insert BEFORE INSERT ON TPXBU
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.BTXC5 IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER TPXBU_on_update BEFORE UPDATE ON TPXBU
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.BTXC5 IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER YYBCX_on_insert BEFORE INSERT ON YYBCX
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.ESFVY IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.SL76B IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER YYBCX_on_update BEFORE UPDATE ON YYBCX
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.ESFVY IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.SL76B IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER YYBCX_on_delete BEFORE DELETE ON YYBCX
+FOR EACH ROW
+BEGIN
+    -- SET @custom_error_message = 'An YYBCX can not be deleted now. If it is a use-case please contact platform team.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'An YYBCX can not be deleted now. If it is a use-case please contact platform team.';
+END//
+----
+
+exec
+CREATE TRIGGER HDDVB_on_update BEFORE UPDATE ON HDDVB
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.FV24E IS NOT NULL AND (NEW.FV24E <> OLD.FV24E)
+    OR
+    NEW.UJ6XY IS NOT NULL AND (NEW.UJ6XY <> OLD.UJ6XY)
+    OR
+    NEW.M22QN IS NOT NULL AND (NEW.M22QN <> OLD.M22QN)
+    OR
+    NEW.ETPQV IS NOT NULL AND (NEW.ETPQV <> OLD.ETPQV)
+    OR
+    NEW.PRUV2 IS NOT NULL AND (NEW.PRUV2 <> OLD.PRUV2)
+  THEN
+    -- SET @custom_error_message = 'For a built-in table, fields identifying where to apply and from where it originates can not be changed!';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'For a built-in table, fields identifying where to apply and from where it originates can not be changed!';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER ZYGMF_on_insert BEFORE INSERT ON ZYGMF
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER ZYGMF_on_update BEFORE UPDATE ON ZYGMF
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER ZYGMF_on_delete BEFORE DELETE ON ZYGMF
+FOR EACH ROW
+BEGIN
+    -- SET @custom_error_message = 'A ZYGMF can not be deleted now. If it is a use-case please contact platform team.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'A ZYGMF can not be deleted now. If it is a use-case please contact platform team.';
+END//
+----
+
+exec
+CREATE TRIGGER JDLNA_on_insert BEFORE INSERT ON JDLNA
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.FTQLQ IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.FWWIQ IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.O3QXW IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  UPDATE S3FQX SET ADWYM = 1;
+END//
+----
+
+exec
+CREATE TRIGGER JDLNA_on_update BEFORE UPDATE ON JDLNA
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.FTQLQ IS NOT NULL AND (NEW.FTQLQ <> OLD.FTQLQ)
+  THEN
+    -- SET @custom_error_message = 'The FTQLQ of a VCGT3 can not be modified. Delete and re-add if necessary.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The FTQLQ of a VCGT3 can not be modified. Delete and re-add if necessary.';
+  END IF;
+  IF
+    NEW.FTQLQ IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.FWWIQ IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.O3QXW IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER BACOW_on_insert BEFORE INSERT ON BACOW
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.WZP3R IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER BACOW_on_update BEFORE UPDATE ON BACOW
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.WZP3R IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER SFEGG_on_insert BEFORE INSERT ON SFEGG
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.NO52D IN (SELECT SVAZ4 FROM TPXHZ)
+    OR NEW.VYO5E IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF
+    NEW.ADURZ <= 0
+  THEN
+    -- SET @custom_error_message = 'ADURZ must be positive.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'ADURZ must be positive.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER SFEGG_on_update BEFORE UPDATE ON SFEGG
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.NO52D IN (SELECT SVAZ4 FROM TPXHZ)
+    OR NEW.VYO5E IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF
+    NEW.ADURZ <= 0
+  THEN
+    -- SET @custom_error_message = 'ADURZ must be positive.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'ADURZ must be positive.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER FLQLP_on_insert BEFORE INSERT ON FLQLP
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.V5DPX IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF
+    NEW.ZRV3B NOT IN ('=', '<=', '>=', '<', '>')
+  THEN
+    -- SET @custom_error_message = 'The ZRV3B must be on of the following: ''='', ''<='', ''>='', ''<'', ''>''.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The ZRV3B must be on of the following: ''='', ''<='', ''>='', ''<'', ''>''.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER FLQLP_on_update BEFORE UPDATE ON FLQLP
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.FZ2R5 IS NOT NULL AND (NEW.FZ2R5 <> OLD.FZ2R5)
+    OR
+    NEW.LUEVY IS NOT NULL AND (NEW.LUEVY <> OLD.LUEVY)
+    OR
+    NEW.M22QN IS NOT NULL AND (NEW.M22QN <> OLD.M22QN)
+    OR
+    NEW.NRURT IS NOT NULL AND (NEW.NRURT <> OLD.NRURT)
+    OR
+    NEW.OCA7E IS NOT NULL AND (NEW.OCA7E <> OLD.OCA7E)
+    OR
+    NEW.XMM6Q IS NOT NULL AND (NEW.XMM6Q <> OLD.XMM6Q)
+  THEN
+    -- SET @custom_error_message = 'For a built-in table, fields identifying where to apply and from where it originates can not be changed!';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'For a built-in table, fields identifying where to apply and from where it originates can not be changed!';
+  END IF;
+  IF
+    NEW.V5DPX IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF
+    NEW.ZRV3B NOT IN ('=', '<=', '>=', '<', '>')
+  THEN
+    -- SET @custom_error_message = 'The ZRV3B must be on of the following: ''='', ''<='', ''>='', ''<'', ''>''.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The ZRV3B must be on of the following: ''='', ''<='', ''>='', ''<'', ''>''.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER XOAOP_on_insert BEFORE INSERT ON XOAOP
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER XOAOP_on_update BEFORE UPDATE ON XOAOP
+FOR EACH ROW
+BEGIN
+  IF
+    OLD.DZLIM = 'NER' AND NEW.DZLIM <> 'NER'
+    OR
+    OLD.DZLIM = 'BER' AND NEW.DZLIM <> 'BER'
+    OR
+    OLD.DZLIM = 'HR' AND NEW.DZLIM <> 'HR'
+    OR
+    OLD.DZLIM = 'MMR' AND NEW.DZLIM <> 'MMR'
+  THEN
+    -- SET @custom_error_message = 'NER, BER, HR and MMR ECUWUs can not be modified to another PV2SV.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'NER, BER, HR and MMR ECUWUs can not be modified to another PV2SV.';
+  END IF;
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER XOAOP_on_delete BEFORE DELETE ON XOAOP
+FOR EACH ROW
+BEGIN
+  IF
+    OLD.DZLIM IN ('NER', 'BER', 'HR', 'MMR')
+  THEN
+    -- SET @custom_error_message = 'NER, BER, HR and MMR ECUWUs can not be deleted.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'NER, BER, HR and MMR ECUWUs can not be deleted.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER PG27A_on_insert BEFORE INSERT ON PG27A
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER PG27A_on_update BEFORE UPDATE ON PG27A
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER NPCYY_on_insert BEFORE INSERT ON NPCYY
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.B5OUF <= 0
+  THEN
+    -- SET @custom_error_message = 'B5OUF must be positive.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'B5OUF must be positive.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER NPCYY_on_update BEFORE UPDATE ON NPCYY
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.B5OUF <= 0
+  THEN
+    -- SET @custom_error_message = 'B5OUF must be positive.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'B5OUF must be positive.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER FEIOE_on_insert BEFORE INSERT ON FEIOE
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.FVGD2 NOT IN (0, 1)
+    OR
+    NEW.YP2CR NOT IN (0, 1)
+    OR
+    NEW.TQ7W3 NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'FVGD2, YP2CR, and TQ7W3 fields must be either 0 or 1.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'FVGD2, YP2CR, and TQ7W3 fields must be either 0 or 1.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER FEIOE_on_update BEFORE UPDATE ON FEIOE
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.FVGD2 NOT IN (0, 1)
+    OR
+    NEW.YP2CR NOT IN (0, 1)
+    OR
+    NEW.TQ7W3 NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'FVGD2, YP2CR, and TQ7W3 fields must be either 0 or 1.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'FVGD2, YP2CR, and TQ7W3 fields must be either 0 or 1.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER SZQWJ_on_insert BEFORE INSERT ON SZQWJ
+FOR EACH ROW
+BEGIN
+  IF
+    (SELECT DZLIM FROM XOAOP WHERE id = NEW.CH3FR) NOT IN ('NER', 'BER', 'HR', 'MMR')
+  THEN
+    -- SET @custom_error_message = 'The ECUWU must be one of the following: ''NER'', ''BER'', ''HR'', ''MMR''.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The ECUWU must be one of the following: ''NER'', ''BER'', ''HR'', ''MMR''.';
+  END IF;
+  IF
+    NEW.D237E NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'The D237E field must be either 0 or 1.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The D237E field must be either 0 or 1.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER SZQWJ_on_update BEFORE UPDATE ON SZQWJ
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.CH3FR IS NOT NULL AND (NEW.CH3FR <> OLD.CH3FR)
+    OR
+    NEW.GXLUB IS NOT NULL AND (NEW.GXLUB <> OLD.GXLUB)
+    OR
+    NEW.JOGI6 IS NOT NULL AND (NEW.JOGI6 <> OLD.JOGI6)
+  THEN
+    -- SET @custom_error_message = 'For a built-in table, fields identifying where to apply and from where it originates can not be changed!';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'For a built-in table, fields identifying where to apply and from where it originates can not be changed!';
+  END IF;
+  IF
+    (SELECT DZLIM FROM XOAOP WHERE id = NEW.CH3FR) NOT IN ('NER', 'BER', 'HR', 'MMR')
+  THEN
+    -- SET @custom_error_message = 'The ECUWU must be one of the following: ''NER'', ''BER'', ''HR'', ''MMR''.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The ECUWU must be one of the following: ''NER'', ''BER'', ''HR'', ''MMR''.';
+  END IF;
+  IF
+    NEW.D237E NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'The D237E field must be either 0 or 1.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The D237E field must be either 0 or 1.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER JJGQT_on_insert BEFORE INSERT ON JJGQT
+FOR EACH ROW
+BEGIN
+  IF
+    (SELECT DZLIM FROM XOAOP WHERE id = NEW.CH3FR) NOT IN ('NER', 'BER', 'HR', 'MMR')
+  THEN
+    -- SET @custom_error_message = 'The ECUWU must be one of the following: ''NER'', ''BER'', ''HR'', ''MMR''.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The ECUWU must be one of the following: ''NER'', ''BER'', ''HR'', ''MMR''.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER JJGQT_on_update BEFORE UPDATE ON JJGQT
+FOR EACH ROW
+BEGIN
+  IF
+    (SELECT DZLIM FROM XOAOP WHERE id = NEW.CH3FR) NOT IN ('NER', 'BER', 'HR', 'MMR')
+  THEN
+    -- SET @custom_error_message = 'The ECUWU must be one of the following: ''NER'', ''BER'', ''HR'', ''MMR''.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The ECUWU must be one of the following: ''NER'', ''BER'', ''HR'', ''MMR''.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER moa_on_insert BEFORE INSERT ON moa
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER moa_on_update BEFORE UPDATE ON moa
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.DZLIM IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.F3YUE IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER ZTFET_on_insert BEFORE INSERT ON ZTFET
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.CYZU6 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.AERTL IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.SIJCN IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.RTLWN IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.ZMABC IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER ZTFET_on_update BEFORE UPDATE ON ZTFET
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.CYZU6 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.AERTL IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.SIJCN IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.RTLWN IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.ZMABC IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    -- SET @custom_error_message = (SELECT error_message FROM trigger_helper_error_message WHERE DZLIM = 'SVAZ4');
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER S3FQX_on_insert BEFORE INSERT ON S3FQX
+FOR EACH ROW
+BEGIN
+  -- SET @custom_error_message = 'Insertion is forbidden to S3FQX.';
+  -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insertion is forbidden to S3FQX.';
+END//
+----
+
+exec
+CREATE TRIGGER S3FQX_on_update BEFORE UPDATE ON S3FQX
+FOR EACH ROW
+BEGIN
+  IF NEW.ADWYM NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'The ADWYM field is an int boolean (0/1).';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The ADWYM field is an int boolean (0/1).';
+  END IF;
+  IF NEW.FPUYA NOT IN (0, 1)
+  THEN
+    -- SET @custom_error_message = 'The FPUYA field is an int boolean (0/1).';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The FPUYA field is an int boolean (0/1).';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER S3FQX_on_delete BEFORE DELETE ON S3FQX
+FOR EACH ROW
+BEGIN
+  -- SET @custom_error_message = 'Deletion is forbidden from S3FQX.';
+  -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Deletion is forbidden from S3FQX.';
+END//
+----
+
+exec
+CREATE TRIGGER TPXBU_on_delete BEFORE DELETE ON TPXBU
+FOR EACH ROW
+BEGIN
+    -- SET @custom_error_message = 'An TPXBU can not be deleted now. If it is a use-case please contact platform team.';
+    -- SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @custom_error_message;
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'An TPXBU can not be deleted now. If it is a use-case please contact platform team.';
+END//
+----
+
+exec
+CREATE TRIGGER THNTS_on_insert BEFORE INSERT ON THNTS
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.IXUXU IS NULL
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The IXUXU field is mandatory.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER THNTS_on_update BEFORE UPDATE ON THNTS
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.IXUXU IS NULL
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'The IXUXU field is mandatory.';
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER E2I7U_on_insert BEFORE INSERT ON E2I7U
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.TW55N IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.FGG57 IS NOT NULL AND NEW.FGG57 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.ZH72S IS NOT NULL AND NEW.ZH72S IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF
+    NEW.FSK67 NOT IN ('zero_based', 'one_based', 'O7VZD')
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'FSK67 must be either zero_based, one_based, or O7VZD.';
+  END IF;
+  IF
+    NEW.FGG57 IS NOT NULL AND NEW.DKCAJ NOT IN (SELECT id FROM F35MI WHERE DZLIM = 'protein' OR DZLIM = 'micro_rna')
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Only protein or micro_rna TAFAX UWBAIs can have IYDZV.';
+  END IF;
+  IF
+    NEW.ZH72S IS NOT NULL AND NEW.DKCAJ NOT IN (SELECT id FROM F35MI WHERE DZLIM = 'protein')
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Only protein TAFAX UWBAIs can have ZH72S.';
+  END IF;
+  IF
+    NEW.FGG57 IS NOT NULL AND NEW.TCE7A IS NULL
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'TCE7A is mandatory if UWBAI has IYDZV.';
+  END IF;
+  IF
+    NEW.KNG7T IS NOT NULL
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'On insertion KNG7T must be null. The build-in process will find a correspondig for it.';
+  END IF;
+  IF
+    NEW.FGG57 IS NOT NULL OR NEW.ZH72S IS NOT NULL
+  THEN
+    UPDATE S3FQX SET ADWYM = 1, FPUYA = 1;
+  END IF;
+END//
+----
+
+exec
+CREATE TRIGGER E2I7U_on_update BEFORE UPDATE ON E2I7U
+FOR EACH ROW
+BEGIN
+  IF
+    NEW.TW55N IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.FGG57 IS NOT NULL AND NEW.FGG57 IN (SELECT SVAZ4 FROM TPXHZ)
+    OR
+    NEW.ZH72S IS NOT NULL AND NEW.ZH72S IN (SELECT SVAZ4 FROM TPXHZ)
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'String field contains invalid value, like empty string, ''none'', ''null'', ''n/a'', ''nan'' etc.';
+  END IF;
+  IF
+    NEW.FSK67 NOT IN ('zero_based', 'one_based', 'O7VZD')
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'FSK67 must be either zero_based, one_based, or O7VZD.';
+  END IF;
+  IF
+    NEW.FGG57 IS NOT NULL AND NEW.DKCAJ NOT IN (SELECT id FROM F35MI WHERE DZLIM = 'protein' OR DZLIM = 'micro_rna')
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Only protein or micro_rna TAFAX UWBAIs can have IYDZV.';
+  END IF;
+  IF
+    NEW.ZH72S IS NOT NULL AND NEW.DKCAJ NOT IN (SELECT id FROM F35MI WHERE DZLIM = 'protein')
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Only protein TAFAX UWBAIs can have ZH72S.';
+  END IF;
+  IF
+    NEW.FGG57 IS NOT NULL AND NEW.TCE7A IS NULL
+  THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'TCE7A is mandatory if UWBAI has IYDZV.';
+  END IF;
+END//
+----

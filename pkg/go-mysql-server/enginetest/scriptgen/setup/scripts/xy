@@ -1,0 +1,128 @@
+exec
+CREATE table xy (x int primary key, y int, unique index y_idx(y));
+----
+
+exec
+CREATE table uv (u int primary key, v int);
+----
+
+exec
+CREATE table ab (a int primary key, b int);
+----
+
+exec
+CREATE table pq (p int primary key, q int);
+----
+
+exec
+CREATE table mn (m int primary key, n int);
+----
+
+exec
+create table rs (r int primary key, s int, index s_idx(s));
+----
+
+exec
+CREATE table xy_hasnull (x int primary key, y int);
+----
+
+exec
+CREATE table ab_hasnull (a int primary key, b int);
+----
+
+exec
+CREATE table xy_hasnull_idx (x int primary key, y int, index y_idx(y));
+----
+
+exec
+insert into xy_hasnull values
+  (1,0),
+  (2,1),
+  (0,2),
+  (3,NULL);
+----
+
+exec
+insert into ab_hasnull values
+  (0,2),
+  (1,2),
+  (2,NULL),
+  (3,1);
+----
+
+exec
+insert into xy_hasnull_idx values
+  (1,0),
+  (2,1),
+  (0,2),
+  (3,NULL);
+----
+
+exec
+insert into xy values
+  (1,0),
+  (2,1),
+  (0,2),
+  (3,3);
+----
+
+exec
+insert into uv values
+  (0,1),
+  (1,1),
+  (2,2),
+  (3,2);
+----
+
+exec
+insert into ab values
+  (0,2),
+  (1,2),
+  (2,2),
+  (3,1);
+----
+
+exec
+insert into pq values
+  (0,0),
+  (1,1),
+  (2,2),
+  (3,3);
+----
+
+exec
+insert into mn values
+  (2,0),
+  (3,1),
+  (4,2),
+  (5,3);
+----
+
+exec
+insert into rs values
+  (0,0),
+  (1,0),
+  (2,0),
+  (4,4),
+  (5,4);
+----
+
+exec
+analyze table ab update histogram on (a) using data '{"row_count": 1000}';
+----
+
+exec
+analyze table ab_hasnull update histogram on (a) using data '{"row_count": 1000}';
+----
+
+exec
+analyze table xy update histogram on (x) using data '{"row_count": 1000}';
+----
+
+exec
+analyze table xy_hasnull update histogram on (x) using data '{"row_count": 1000}';
+----
+
+exec
+analyze table rs update histogram on (r) using data '{"row_count": 1000}'
+----

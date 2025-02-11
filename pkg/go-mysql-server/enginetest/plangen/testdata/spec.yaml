@@ -1,0 +1,20 @@
+plans:
+  - name: PlanTests
+    path: enginetest/queries/query_plans.go
+  - name: IndexPlanTests
+    path: enginetest/queries/index_query_plans.go
+  - name: IntegrationPlanTests
+    path: enginetest/queries/integration_plans.go
+# this suite is throwing a missing table error, despite the table being in the set up
+#  - name: TpchPlanTests
+#    path: enginetest/queries/tpch_plans.go
+  - name: TpccPlanTests
+    path: enginetest/queries/tpcc_plans.go
+#  - name: TpcdsPlanTests
+#    path: enginetest/queries/tpcds_plans.go
+  - name: ImdbPlanTests
+    path: enginetest/queries/imdb_plans.go
+  - name: GeneratedColumnPlanTests
+    path: enginetest/queries/generated_column_plans.go
+  - name: SysbenchPlanTests
+    path: enginetest/queries/sysbench_plans.go

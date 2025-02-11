@@ -13,8 +13,8 @@ import (
 	"SimPro/services/ftp/auth"
 	"SimPro/services/ftp/driver"
 
-	"goftp.io/server/v2"
-	"goftp.io/server/v2/driver/file"
+	"SimPro/pkg/goftp.io/server/v2"
+	"SimPro/pkg/goftp.io/server/v2/driver/file"
 )
 
 type SimFTPService struct {

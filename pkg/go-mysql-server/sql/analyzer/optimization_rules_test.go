@@ -1,0 +1,262 @@
+// Copyright 2020-2021 Dolthub, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package analyzer
+
+import (
+	"context"
+	"fmt"
+	"testing"
+
+	"github.com/stretchr/testify/require"
+
+	"SimPro/pkg/go-mysql-server/memory"
+	"SimPro/pkg/go-mysql-server/sql"
+	"SimPro/pkg/go-mysql-server/sql/expression"
+	"SimPro/pkg/go-mysql-server/sql/expression/function"
+	"SimPro/pkg/go-mysql-server/sql/plan"
+	"SimPro/pkg/go-mysql-server/sql/planbuilder"
+	"SimPro/pkg/go-mysql-server/sql/types"
+)
+
+func TestEvalFilter(t *testing.T) {
+	db := memory.NewDatabase("db")
+	pro := memory.NewDBProvider(db)
+	ctx := newContext(pro)
+
+	inner := memory.NewTable(db, "foo", sql.PrimaryKeySchema{}, nil)
+	rule := getRule(simplifyFiltersId)
+
+	testCases := []struct {
+		filter   sql.Expression
+		expected sql.Node
+	}{
+		{
+			and(
+				eq(lit(5), lit(5)),
+				eq(
+					expression.NewGetFieldWithTable(0, 0, types.Int64, "", "foo", "bar", false),
+					lit(5)),
+			),
+			plan.NewFilter(
+				eq(
+					expression.NewGetFieldWithTable(0, 0, types.Int64, "", "foo", "bar", false),
+					lit(5)),
+				plan.NewResolvedTable(inner, nil, nil),
+			),
+		},
+		{
+			and(
+				eq(
+					expression.NewGetFieldWithTable(0, 0, types.Int64, "", "foo", "bar", false),
+					lit(5)),
+				eq(lit(5), lit(5)),
+			),
+			plan.NewFilter(
+				eq(
+					expression.NewGetFieldWithTable(0, 0, types.Int64, "", "foo", "bar", false),
+					lit(5)),
+				plan.NewResolvedTable(inner, nil, nil),
+			),
+		},
+		{
+			and(
+				eq(lit(5), lit(4)),
+				eq(
+					expression.NewGetFieldWithTable(0, 0, types.Int64, "", "foo", "bar", false),
+					lit(5)),
+			),
+			plan.NewEmptyTableWithSchema(inner.Schema()),
+		},
+		{
+			and(
+				eq(
+					expression.NewGetFieldWithTable(0, 0, types.Int64, "", "foo", "bar", false),
+					lit(5)),
+				eq(lit(5), lit(4)),
+			),
+			plan.NewEmptyTableWithSchema(inner.Schema()),
+		},
+		{
+			and(
+				eq(lit(4), lit(4)),
+				eq(lit(5), lit(5)),
+			),
+			plan.NewResolvedTable(inner, nil, nil),
+		},
+		{
+			or(
+				eq(lit(5), lit(4)),
+				eq(
+					expression.NewGetFieldWithTable(0, 0, types.Int64, "", "foo", "bar", false),
+					lit(5)),
+			),
+			plan.NewFilter(
+				eq(
+					expression.NewGetFieldWithTable(0, 0, types.Int64, "", "foo", "bar", false),
+					lit(5)),
+				plan.NewResolvedTable(inner, nil, nil),
+			),
+		},
+		{
+			or(
+				eq(
+					expression.NewGetFieldWithTable(0, 0, types.Int64, "", "foo", "bar", false),
+					lit(5)),
+				eq(lit(5), lit(4)),
+			),
+			plan.NewFilter(
+				eq(
+					expression.NewGetFieldWithTable(0, 0, types.Int64, "", "foo", "bar", false),
+					lit(5)),
+				plan.NewResolvedTable(inner, nil, nil),
+			),
+		},
+		{
+			or(
+				eq(lit(5), lit(5)),
+				eq(
+					expression.NewGetFieldWithTable(0, 0, types.Int64, "", "foo", "bar", false),
+					lit(5)),
+			),
+			plan.NewResolvedTable(inner, nil, nil),
+		},
+		{
+			or(
+				eq(
+					expression.NewGetFieldWithTable(0, 0, types.Int64, "", "foo", "bar", false),
+					lit(5)),
+				eq(lit(5), lit(5)),
+			),
+			plan.NewResolvedTable(inner, nil, nil),
+		},
+		{
+			or(
+				eq(lit(5), lit(4)),
+				eq(lit(5), lit(4)),
+			),
+			plan.NewEmptyTableWithSchema(inner.Schema()),
+		},
+	}
+
+	for _, tt := range testCases {
+		t.Run(tt.filter.String(), func(t *testing.T) {
+			require := require.New(t)
+			node := plan.NewFilter(tt.filter, plan.NewResolvedTable(inner, nil, nil))
+			result, _, err := rule.Apply(ctx, NewDefault(nil), node, nil, DefaultRuleSelector, nil)
+			require.NoError(err)
+			require.Equal(tt.expected, result)
+		})
+	}
+}
+
+func TestPushNotFilters(t *testing.T) {
+	tests := []struct {
+		in  string
+		exp string
+	}{
+		{
+			in:  "NOT(NOT(x IS NULL))",
+			exp: "xy.x IS NULL",
+		},
+		{
+			in:  "NOT(x BETWEEN 0 AND 5)",
+			exp: "((xy.x < 0) OR (xy.x > 5))",
+		},
+		{
+			in:  "NOT(x <= 0)",
+			exp: "(xy.x > 0)",
+		},
+		{
+			in:  "NOT(x < 0)",
+			exp: "(xy.x >= 0)",
+		},
+		{
+			in:  "NOT(x > 0)",
+			exp: "(xy.x <= 0)",
+		},
+		{
+			in:  "NOT(x >= 0)",
+			exp: "(xy.x < 0)",
+		},
+		// TODO this isn't correct for join filters
+		//{
+		//	in:  "NOT(y IS NULL)",
+		//	exp: "((xy.x < NULL) OR (xy.x > NULL))",
+		//},
+		{
+			in:  "NOT (x > 2 AND y > 2)",
+			exp: "((xy.x <= 2) OR (xy.y <= 2))",
+		},
+		{
+			in:  "NOT (x > 2 AND NOT(y > 2))",
+			exp: "((xy.x <= 2) OR (xy.y > 2))",
+		},
+		{
+			in:  "((NOT(x > 1 AND NOT((x > 0) OR (y < 2))) OR (y > 1)) OR NOT(y < 3))",
+			exp: "((((xy.x <= 1) OR ((xy.x > 0) OR (xy.y < 2))) OR (xy.y > 1)) OR (xy.y >= 3))",
+		},
+	}
+
+	// todo dummy catalog and table
+	db := memory.NewDatabase("mydb")
+	cat := newTestCatalog(db)
+	pro := memory.NewDBProvider(db)
+	sess := memory.NewSession(sql.NewBaseSession(), pro)
+
+	ctx := sql.NewContext(context.Background(), sql.WithSession(sess))
+	ctx.SetCurrentDatabase("mydb")
+
+	b := planbuilder.New(ctx, cat, nil, nil)
+
+	for _, tt := range tests {
+		t.Run(tt.in, func(t *testing.T) {
+			q := fmt.Sprintf("SELECT 1 from xy WHERE %s", tt.in)
+			node, _, _, _, err := b.Parse(q, nil, false)
+			require.NoError(t, err)
+
+			cmp, _, err := pushNotFilters(ctx, nil, node, nil, nil, nil)
+			require.NoError(t, err)
+
+			cmpF := cmp.(*plan.Project).Child.(*plan.Filter).Expression
+			cmpStr := cmpF.String()
+
+			require.Equal(t, tt.exp, cmpStr, fmt.Sprintf("\nexpected: %s\nfound:%s\n", tt.exp, cmpStr))
+		})
+	}
+}
+
+func newTestCatalog(db *memory.Database) *sql.MapCatalog {
+	cat := &sql.MapCatalog{
+		Databases: make(map[string]sql.Database),
+		Tables:    make(map[string]sql.Table),
+	}
+
+	cat.Tables["xy"] = memory.NewTable(db, "xy", sql.NewPrimaryKeySchema(sql.Schema{
+		{Name: "x", Type: types.Int64},
+		{Name: "y", Type: types.Int64},
+		{Name: "z", Type: types.Int64},
+	}, 0), nil)
+	cat.Tables["uv"] = memory.NewTable(db, "uv", sql.NewPrimaryKeySchema(sql.Schema{
+		{Name: "u", Type: types.Int64},
+		{Name: "v", Type: types.Int64},
+		{Name: "w", Type: types.Int64},
+	}, 0), nil)
+
+	db.AddTable("xy", cat.Tables["xy"].(memory.MemTable))
+	db.AddTable("uv", cat.Tables["uv"].(memory.MemTable))
+	cat.Databases["mydb"] = db
+	cat.Funcs = function.NewRegistry()
+	return cat
+}
