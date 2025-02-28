@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="beda1e59-10f2-48ad-843b-eb6d9653797d" name="更改" comment="add pkg">
+    <list default="true" id="beda1e59-10f2-48ad-843b-eb6d9653797d" name="更改" comment="add readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/telnet/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/services/telnet/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +23,14 @@
   <component name="GOROOT" url="file://$USER_HOME$/go/pkg/mod/golang.org/toolchain@v0.0.1-go1.23.4.windows-amd64" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Iam0x17/SimPro",
+    "accountId": "26a8aad5-b7e3-41d8-abdc-cc9563b56b6e"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/pkg/go-mysql-server/engine.go" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/pkg/goftp.io/server/v2/cmd.go" root0="FORCE_HIGHLIGHTING" />
@@ -115,7 +122,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -129,7 +148,8 @@
     <MESSAGE value="optimize redis,ssh,telnet" />
     <MESSAGE value="optimize mysql,ftp,postgres" />
     <MESSAGE value="add pkg" />
-    <option name="LAST_COMMIT_MESSAGE" value="add pkg" />
+    <MESSAGE value="add readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="add readme" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
