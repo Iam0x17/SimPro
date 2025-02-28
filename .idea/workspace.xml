@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="beda1e59-10f2-48ad-843b-eb6d9653797d" name="更改" comment="optimize mysql,ftp,postgres">
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/ftp/auth/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/services/ftp/auth/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/ftp/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/services/ftp/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/mysql/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/services/mysql/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/postgres/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/services/postgres/service.go" afterDir="false" />
+    <list default="true" id="beda1e59-10f2-48ad-843b-eb6d9653797d" name="更改" comment="add pkg">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/telnet/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/services/telnet/service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +61,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/code/go/SimPro&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/code/golang/LutraTH&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
@@ -132,7 +128,8 @@
     <MESSAGE value="add cmd" />
     <MESSAGE value="optimize redis,ssh,telnet" />
     <MESSAGE value="optimize mysql,ftp,postgres" />
-    <option name="LAST_COMMIT_MESSAGE" value="optimize mysql,ftp,postgres" />
+    <MESSAGE value="add pkg" />
+    <option name="LAST_COMMIT_MESSAGE" value="add pkg" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

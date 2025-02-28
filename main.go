@@ -13,9 +13,13 @@ import (
 	"SimPro/services/telnet"
 	"embed"
 	"fmt"
-	"github.com/jessevdk/go-flags"
 	"log"
+	"os"
+	"os/signal"
 	"strings"
+	"syscall"
+
+	"github.com/jessevdk/go-flags"
 )
 
 type Options struct {
@@ -51,17 +55,16 @@ func main() {
 		}
 	}
 
-	//fmt.Printf("Targets: %s \n", strings.Join(Targets, ", "))
 	err = http.StartHttpService()
 	if err != nil {
 		panic(err)
 	}
-	//fmt.Println("路径:" + opts.ConfigPath)
+
 	cfg, err := config.LoadConfig(opts.ConfigPath)
 	if err != nil {
 		log.Fatalf("加载配置失败: %v", err)
 	}
-	//common.Logger.Info("解析后的字符串切片", zap.Strings("services", servicesToStart))
+
 	manager := services.NewServiceManager(cfg)
 	manager.AddService(&ssh.SimSSHService{})
 	manager.AddService(&redis.SimRedisService{})
@@ -78,5 +81,10 @@ func main() {
 		}
 	}
 
-	select {}
+	// 创建信号通道
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
+
+	// 等待退出信号
+	<-sigChan
 }

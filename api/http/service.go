@@ -2,6 +2,7 @@ package http
 
 import (
 	"SimPro/api/http/handler"
+	"SimPro/common"
 	"fmt"
 	"net/http"
 )
@@ -11,9 +12,11 @@ func StartHttpService() error {
 	go func() {
 		err := http.ListenAndServe(":8080", nil)
 		if err != nil {
-			fmt.Println("http service start error", err)
+			common.Logger.Error(fmt.Sprintf("http service start error: %v", err))
+		} else {
+			common.Logger.Info("http service start success")
 		}
-		fmt.Println("http service start success")
+
 	}()
 	return nil
 }

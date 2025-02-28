@@ -11,7 +11,6 @@ import (
 	"sync"
 )
 
-// MockTelnetService 实现通用的MockService接口
 type SimTelnetService struct {
 	listener net.Listener
 	wg       sync.WaitGroup
@@ -29,7 +28,6 @@ func (s *SimTelnetService) Stop() error {
 	return nil
 }
 
-// Serve方法处理FTP连接相关逻辑
 func (s *SimTelnetService) Start(cfg *config.Config) error {
 
 	var err error
