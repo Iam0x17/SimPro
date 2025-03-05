@@ -45,6 +45,9 @@ type Config struct {
 		User string `yaml:"user"`
 		Pass string `yaml:"pass"`
 	} `yaml:"mysql"`
+	Web struct {
+		Port string `yaml:"port"`
+	} `yaml:"web"`
 }
 
 func LoadConfig(path string) (*Config, error) {

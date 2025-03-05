@@ -10,7 +10,7 @@
 SimPro 是用Go语言构建的协议模拟器，采用模块化架构实现多协议(FTP/SSH/DB等)服务。可用于安全验证和简单充当蜜罐服务。
 
 # 🚀 功能介绍
-通过命令行参数/HTTP接口控制服务启停
+通过命令行参数/Web界面控制服务启停
 
 支持SSH、Redis、PostgreSQL、MySQL、Telnet、FTP等多种协议服务
 
@@ -23,6 +23,8 @@ Application Options:
   /c, /config:    配置文件路径
   /l, /log:       日志文件路径
   /v, /verbose    详细打印caller
+  /w, /web        启动web服务器
+  /p, /port:      web服务器端口 (default: 8080)
 
 Help Options:
   /?              Show this help message
@@ -43,8 +45,7 @@ Help Options:
 # 🔍功能演示
 启动SSH服务
 
-`go run main.go /s ssh`
-
+`SimPro /s ssh`
 ssh远程连接，前2次输入错误密码，第3次输入正确密码模拟登录，输入whoami及ls命令的返回结果
 
 ![](/docs/ssh_connect.png)
@@ -52,6 +53,15 @@ ssh远程连接，前2次输入错误密码，第3次输入正确密码模拟登
 日志结构化记录了远程登录ip、登录账户密码、执行命令等信息
 
 ![](/docs/ssh_server.png)
+
+Web界面
+
+`SimPro /w /p 8000`
+浏览器打开http://localhost:8000/
+服务管理
+![](/docs/web_manger.png)
+服务配置
+![](/docs/web_config.png)
 
 # <font style="color:rgb(204, 204, 204);">📊</font>后续计划
 1.增加各种服务
