@@ -25,5 +25,3 @@ mysql:
   port: 3306
   user: root
   pass: 123456
-web:
-  port: 8080
